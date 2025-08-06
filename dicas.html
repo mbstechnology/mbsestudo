@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dicas de Estudo - MBS Estudo+</title>
+<style>
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --secondary: #3f37c9;
+  --success: #4cc9f0;
+  --light: #f8f9fa;
+  --dark: #1e293b;
+  --card-bg: #ffffff;
+  --bg: #f8fafc;
+  --text: #333333;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark-mode {
+  --primary: #4895ef;
+  --primary-dark: #3b82f6;
+  --secondary: #4361ee;
+  --success: #48cae4;
+  --light: #121212;
+  --dark: #f8f9fa;
+  --card-bg: #1e293b;
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --text-light: #94a3b8;
+  --border: #334155;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: var(--transition);
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navigation */
+nav {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 28px;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.mobile-toggle:hover {
+  background-color: rgba(67, 97, 238, 0.1);
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 100px 0 60px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sections */
+section {
+  padding: 80px 0;
+}
+
+.section-title {
+  margin-top: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+  color: var(--text);
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-title span {
+  color: var(--primary);
+}
+
+/* Premium Badge */
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--success);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(76, 201, 240, 0.3);
+}
+
+/* Expert Cards */
+.experts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.expert-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  border: 1px solid var(--border);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.expert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.expert-header {
+  padding: 25px 25px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.expert-name {
+  color: var(--primary);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.expert-title {
+  color: var(--text-light);
+  margin: 5px 0 10px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.expert-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.expert-body {
+  padding: 25px;
+  flex-grow: 1;
+}
+
+.expert-body h4 {
+  color: var(--primary);
+  margin: 15px 0 10px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.expert-body p {
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.expert-footer {
+  padding: 15px 25px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expert-tag {
+  background: var(--primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.quote-carousel {
+  background: var(--primary);
+  color: #ffffff; /* <-- cor do texto forçada para branco */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+.quote-item {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.quote-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.quote-author {
+  text-align: right;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background: var(--card-bg);
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--border);
+  transition: var(--transition);
+  z-index: 100;
+  animation: float 3s ease-in-out infinite;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    background: var(--card-bg);
+    width: 100%;
+    height: calc(100vh - 70px);
+    padding: 40px 20px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+  }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  
+  .nav-links li {
+    margin: 18px 0;
+  }
+  
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 12px 0;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .experts-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .theme-toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Icons */
+[data-icon="home"]::before { content: "🏠"; }
+[data-icon="features"]::before { content: "🔧"; }
+[data-icon="premium"]::before { content: "💎"; }
+[data-icon="activation"]::before { content: "🔑"; }
+[data-icon="about"]::before { content: "ℹ️"; }
+[data-icon="contact"]::before { content: "📬"; }
+[data-icon="light"]::before { content: "☀️"; }
+[data-icon="dark"]::before { content: "🌙"; }
+[data-icon="star"]::before { content: "⭐"; }
+[data-icon="idea"]::before { content: "💡"; }
+[data-icon="clock"]::before { content: "⏰"; }
+[data-icon="brain"]::before { content: "🧠"; }
+[data-icon="book"]::before { content: "📖"; }
+[data-icon="check"]::before { content: "✓"; }
+[data-icon="target"]::before { content: "🎯"; }
+[data-icon="chart"]::before { content: "📈"; }
+[data-icon="atom"]::before { content: "⚛️"; }
+[data-icon="lightbulb"]::before { content: "💡"; }
+[data-icon="rocket"]::before { content: "🚀"; }
+[data-icon="microscope"]::before { content: "🔬"; }
+[data-icon="math"]::before { content: "🧮"; }
+[data-icon="pen"]::before { content: "✍️"; }
+[data-icon="globe"]::before { content: "🌐"; }
+[data-icon="music"]::before { content: "🎵"; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-container container">
+    <a href="index.html" class="logo">
+      <span>MBS Estudo+</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-icon="home">Início</a></li>
+      <li><a href="index.html#funcionalidades">Funcionalidades</a></li>
+      <li><a href="index.html#planos">Planos Premium</a></li>
+      <li><a href="index.html#ativacao">Ativação</a></li>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Toggle Menu">☰</button>
+  </div>
+</nav>
+
+<section class="hero-section">
+  <div class="container hero-content">
+    <h1>Dicas dos Grandes Gênios</h1>
+    <p>As estratégias de aprendizagem e produtividade dos maiores estudiosos, cientistas e inventores da história</p>
+    <div class="premium-badge"><span data-icon="star"></span> Premium</div>
+  </div>
+</section>
+
+<main class="container">
+  <h2 class="section-title">Sabedoria dos <span>Grandes Mentes</span></h2>
+  
+<div class="quote-carousel">
+
+  <div class="quote-item active">
+    <p class="quote-text">"A imaginação é mais importante que o conhecimento. O conhecimento é limitado. A imaginação circunda o mundo."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Aprender nunca esgota a mente."</p>
+    <p class="quote-author">— Leonardo da Vinci</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Se você quer descobrir os segredos do universo, pense em termos de energia, frequência e vibração."</p>
+    <p class="quote-author">— Nikola Tesla</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O primeiro princípio é que você não deve enganar a si mesmo – e você é a pessoa mais fácil de enganar."</p>
+    <p class="quote-author">— Richard Feynman</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A ciência é mais do que um corpo de conhecimento. É uma maneira de pensar."</p>
+    <p class="quote-author">— Carl Sagan</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O computador é para mim apenas uma ferramenta, como o pincel para o pintor."</p>
+    <p class="quote-author">— Ada Lovelace</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A inovação distingue um líder de um seguidor."</p>
+    <p class="quote-author">— Steve Jobs</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O sucesso é a soma de pequenos esforços repetidos dia após dia."</p>
+    <p class="quote-author">— Robert Collier</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O que sabemos é uma gota; o que ignoramos é um oceano."</p>
+    <p class="quote-author">— Isaac Newton</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A persistência é o caminho do êxito."</p>
+    <p class="quote-author">— Charles Chaplin</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A melhor maneira de prever o futuro é criá-lo."</p>
+    <p class="quote-author">— Peter Drucker</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A verdadeira viagem da descoberta não consiste em buscar novas paisagens, mas em ter novos olhos."</p>
+    <p class="quote-author">— Marcel Proust</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O erro é uma oportunidade de aprendizado, não um fracasso."</p>
+    <p class="quote-author">— Henry Ford</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A simplicidade é o último grau de sofisticação."</p>
+    <p class="quote-author">— Leonardo da Vinci</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O intelecto busca, mas o coração encontra."</p>
+    <p class="quote-author">— George Sand</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Se eu vi mais longe, foi por estar sobre os ombros de gigantes."</p>
+    <p class="quote-author">— Isaac Newton</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A matemática é a linguagem com a qual Deus escreveu o universo."</p>
+    <p class="quote-author">— Galileo Galilei</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A curiosidade é a semente da descoberta."</p>
+    <p class="quote-author">— Galileo Galilei</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Grandes coisas nunca vêm da zona de conforto."</p>
+    <p class="quote-author">— Anônimo</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O aprendizado nunca esgota a mente."</p>
+    <p class="quote-author">— Leonardo da Vinci</p>
+  </div>
+
+</div>
+
+  <div class="experts-container">
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="atom"></span></div>
+        <h3 class="expert-name">Albert Einstein</h3>
+        <p class="expert-title">Físico Teórico | Prêmio Nobel</p>
+      </div>
+      <div class="expert-body">
+        <h4>Pensamento em Experimentos Mentais</h4>
+        <p>Einstein usava "experimentos mentais" para visualizar conceitos complexos. Imagine cenários físicos em sua mente antes de aplicar matemática.</p>
+        
+        <h4>Conexão com a Natureza</h4>
+        <p>Passe tempo na natureza para estimular o pensamento criativo. Einstein frequentemente caminhava pela floresta para resolver problemas difíceis.</p>
+        
+        <h4>Abordagem Lúdica</h4>
+        <p>Trate o aprendizado como um jogo. Einstein disse: "Jamais perca uma oportunidade de brincar". A brincadeira estimula a criatividade científica.</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Física</span>
+        <span>Relatividade</span>
+      </div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="lightbulb"></span></div>
+        <h3 class="expert-name">Thomas Edison</h3>
+        <p class="expert-title">Inventor | 1.093 Patentes</p>
+      </div>
+      <div class="expert-body">
+        <h4>Método de Tentativa e Erro</h4>
+        <p>"Não falhei. Apenas encontrei 10.000 maneiras que não funcionam." Cada erro é um passo para o sucesso. Anote todos os experimentos.</p>
+        
+        <h4>Registro Detalhado</h4>
+        <p>Mantenha um diário de laboratório meticuloso. Edison registrou cada experimento, observação e ideia em cadernos que totalizam mais de 4 milhões de páginas.</p>
+        
+        <h4>Trabalho em Equipe</h4>
+        <p>Crie um "laboratório de invenções" com colegas. A colaboração acelera a inovação e traz perspectivas diversas para problemas complexos.</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Invenção</span>
+        <span>Perseverança</span>
+      </div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="rocket"></span></div>
+        <h3 class="expert-name">Nikola Tesla</h3>
+        <p class="expert-title">Engenheiro | Visionário</p>
+      </div>
+      <div class="expert-body">
+        <h4>Visualização Mental</h4>
+        <p>Tesla podia visualizar dispositivos complexos em 3D em sua mente, testá-los mentalmente e construí-los com precisão perfeita sem protótipos.</p>
+        
+        <h4>Isolamento Estratégico</h4>
+        <p>Trabalhe em períodos de profunda concentração sem interrupções. Tesla frequentemente trabalhava por 84 horas consecutivas sem dormir.</p>
+        
+        <h4>Conexão com o Universo</h4>
+        <p>Entenda que tudo está interconectado. Estude múltiplas disciplinas para ver padrões ocultos que outros não percebem.</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Engenharia</span>
+        <span>Visão</span>
+      </div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="microscope"></span></div>
+        <h3 class="expert-name">Marie Curie</h3>
+        <p class="expert-title">Cientista | Dupla Nobel</p>
+      </div>
+      <div class="expert-body">
+        <h4>Disciplina Rigorosa</h4>
+        <p>Estabeleça uma rotina diária inflexível. Curie trabalhava exatamente 8 horas por dia, 6 dias por semana, com pausas regulares.</p>
+        
+        <h4>Método Científico</h4>
+        <p>Siga o método científico rigorosamente: observação, hipótese, experimentação, análise. Documente tudo com precisão científica.</p>
+        
+        <h4>Resiliência</h4>
+        <p>Supere obstáculos com determinação. Como mulher na ciência, Curie enfrentou preconceito constante, mas persistiu com excelência impecável.</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Ciência</span>
+        <span>Rigor</span>
+      </div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="math"></span></div>
+        <h3 class="expert-name">Leonardo da Vinci</h3>
+        <p class="expert-title">Polímata | Renascimento</p>
+      </div>
+      <div class="expert-body">
+        <h4>Cadernos de Anotações</h4>
+        <p>Mantenha cadernos de anotações em todos os lugares. Da Vinci produziu 13.000 páginas de anotações com desenhos, ideias e observações.</p>
+        
+        <h4>Curiosidade Insaciável</h4>
+        <p>Formule perguntas constantemente. Da Vinci escreveu mais de 5.000 perguntas em seus cadernos, buscando entender todos os aspectos do mundo.</p>
+        
+        <h4>Interconexão do Conhecimento</h4>
+        <p>Estude arte e ciência juntas. A verdadeira inovação acontece na interseção de disciplinas aparentemente não relacionadas.</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Arte</span>
+        <span>Ciência</span>
+      </div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-icon"><span data-icon="pen"></span></div>
+        <h3 class="expert-name">Richard Feynman</h3>
+        <p class="expert-title">Físico | Nobel em Física</p>
+      </div>
+      <div class="expert-body">
+        <h4>Método Feynman</h4>
+        <p>Para realmente entender algo, ensine-o a uma criança. Se não conseguir explicar simplesmente, você não entende completamente.</p>
+        
+        <h4>Aprendizado Ativo</h4>
+        <p>Não apenas leia—faça. Feynman aprendeu biologia trabalhando em laboratórios e realizando experimentos, não apenas lendo livros.</p>
+        
+        <h4>Desafie Assunções</h4>
+        <p>Questionar tudo é essencial. Feynman dizia: "A primeira regra é não enganar a si mesmo, e você é a pessoa mais fácil de enganar."</p>
+      </div>
+      <div class="expert-footer">
+        <span class="expert-tag">Ensino</span>
+        <span>Clareza</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Princípios <span>Universais</span></h2>
+  
+<div class="quote-carousel">
+
+  <div class="quote-item active">
+    <p class="quote-text">"O sucesso consiste em ir de fracasso em fracasso sem perder o entusiasmo."</p>
+    <p class="quote-author">— Winston Churchill</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O único lugar onde o sucesso vem antes do trabalho é no dicionário."</p>
+    <p class="quote-author">— Vidal Sassoon</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A ciência nunca resolveu um problema sem criar outros dez."</p>
+    <p class="quote-author">— George Bernard Shaw</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Grandes espíritos sempre encontraram oposição violenta de mentes medíocres."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A qualidade nunca é um acidente; é sempre o resultado de um esforço inteligente."</p>
+    <p class="quote-author">— John Ruskin</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Inventar é pensar no futuro, realizar é pensar no presente."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O maior perigo para a maioria de nós não é que nosso objetivo seja muito alto e não o alcancemos, mas que seja muito baixo e o alcancemos."</p>
+    <p class="quote-author">— Michelangelo</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O conhecimento é poder."</p>
+    <p class="quote-author">— Francis Bacon</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A inovação é o que distingue um líder de um seguidor."</p>
+    <p class="quote-author">— Steve Jobs</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Não existe substituto para o trabalho duro."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A ciência é a poesia da realidade."</p>
+    <p class="quote-author">— Richard Dawkins</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Sonhe grande e ouse falhar."</p>
+    <p class="quote-author">— Norman Vaughan</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Nada acontece até que algo se mova."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O progresso é impossível sem mudança."</p>
+    <p class="quote-author">— George Bernard Shaw</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A criatividade é a inteligência se divertindo."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O futuro pertence àqueles que acreditam na beleza de seus sonhos."</p>
+    <p class="quote-author">— Eleanor Roosevelt</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A melhor forma de prever o futuro é inventá-lo."</p>
+    <p class="quote-author">— Alan Kay</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A imaginação é a prévia das próximas atrações da vida."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A perseverança é o trabalho duro que você faz depois de se cansar do trabalho duro que já fez."</p>
+    <p class="quote-author">— Newt Gingrich</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Toda inovação nasce da insatisfação."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+</div>
+
+  <div class="experts-container">
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon"><span data-icon="globe"></span></div>
+      <h3 class="expert-name">Carl Sagan</h3>
+      <p class="expert-title">Astrônomo | Divulgador</p>
+    </div>
+    <div class="expert-body">
+      <h4>Senso de Maravilhamento</h4>
+      <p>Mantenha uma sensação de maravilhamento infantil. Sagan dizia: "Somos feitos da mesma matéria das estrelas"—use essa perspectiva cósmica para inspirar seu aprendizado.</p>
+      
+      <h4>Comunicação Clara</h4>
+      <p>Domine a arte de explicar conceitos complexos de forma simples. Sagan podia explicar física quântica para leigos com metáforas poderosas.</p>
+      
+      <h4>Pensamento Cético</h4>
+      <p>Desenvolva um "kit de detecção de charlatanice". Questionar evidências, buscar fontes confiáveis e manter a mente aberta mas cética.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Cosmos</span>
+      <span>Clareza</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon"><span data-icon="music"></span></div>
+      <h3 class="expert-name">Wolfgang Mozart</h3>
+      <p class="expert-title">Compositor | Gênio Musical</p>
+    </div>
+    <div class="expert-body">
+      <h4>Prática Deliberada</h4>
+      <p>Pratique com intenção, não apenas repetição. Mozart estudava composições de mestres, analisando cada nota e estrutura com atenção extrema.</p>
+      
+      <h4>Imersão Total</h4>
+      <p>Imersão completa no domínio. Mozart vivia música 24/7—compondo, executando, ensinando e pensando em música constantemente.</p>
+      
+      <h4>Domínio dos Fundamentos</h4>
+      <p>Domine as regras antes de quebrá-las. Mozart passou anos dominando teoria musical tradicional antes de criar suas inovações revolucionárias.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Música</span>
+      <span>Domínio</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon"><span data-icon="brain"></span></div>
+      <h3 class="expert-name">Leonardo da Vinci</h3>
+      <p class="expert-title">Observação Detalhada</p>
+    </div>
+    <div class="expert-body">
+      <h4>Desenho como Ferramenta de Aprendizado</h4>
+      <p>Desenhe o que você estuda. Da Vinci desenhava anatomia, máquinas e natureza porque o ato de desenhar força uma observação profunda.</p>
+      
+      <h4>Estudo Comparativo</h4>
+      <p>Compare diferentes exemplos do mesmo fenômeno. Da Vinci estudou múltiplos cadáveres para entender variações na anatomia humana.</p>
+      
+      <h4>Notação Simbólica</h4>
+      <p>Crie seus próprios símbolos e abreviações. Da Vinci desenvolveu um sistema de notação pessoal que lhe permitia registrar ideias rapidamente.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Observação</span>
+      <span>Detalhe</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">⚖️</div>
+      <h3 class="expert-name">Laurence Tribe</h3>
+      <p class="expert-title">Jurista | Professor de Direito Constitucional</p>
+    </div>
+    <div class="expert-body">
+      <h4>Defesa dos Direitos Civis</h4>
+      <p>Um dos principais defensores da Constituição americana e dos direitos humanos.</p>
+      
+      <h4>Análise Profunda</h4>
+      <p>Aplica rigoroso pensamento jurídico para interpretar e proteger liberdades fundamentais.</p>
+      
+      <h4>Ativismo Acadêmico</h4>
+      <p>Influenciou políticas públicas por meio de pareceres e debates sobre o sistema legal.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Direito</span>
+      <span>Constitucional</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">👩🏻‍🔬</div>
+      <h3 class="expert-name">Jane Goodall</h3>
+      <p class="expert-title">Primatóloga | Conservacionista</p>
+    </div>
+    <div class="expert-body">
+      <h4>Observação Paciente</h4>
+      <p>Goodall dedicou anos à observação silenciosa dos chimpanzés, aprendendo sobre comportamento animal com paciência e atenção aos detalhes.</p>
+      
+      <h4>Conexão Emocional</h4>
+      <p>Ela estabeleceu uma ligação empática com os animais, mostrando que ciência e emoção podem caminhar juntas para a compreensão do mundo.</p>
+      
+      <h4>Advocacia Científica</h4>
+      <p>Usou seus estudos para promover conservação ambiental e direitos dos animais, inspirando ação global.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Biologia</span>
+      <span>Conservação</span>
+    </div>
+  </div>
+
+  <div class="expert-card"> 
+    <div class="expert-header">
+      <div class="expert-icon">🛡️</div>
+      <h3 class="expert-name">Margaret Thatcher</h3>
+      <p class="expert-title">Primeira-Ministra do Reino Unido | Conservadora</p>
+    </div>
+    <div class="expert-body">
+      <h4>Liderança Resoluta</h4>
+      <p>Conhecida como a “Dama de Ferro”, Thatcher implementou reformas econômicas liberais e defendeu o fortalecimento do mercado livre e da soberania nacional.</p>
+      
+      <h4>Defesa dos Valores Tradicionais</h4>
+      <p>Ela enfatizou a importância da família, segurança e responsabilidade individual como bases para uma sociedade forte.</p>
+      
+      <h4>Geopolítica Realista</h4>
+      <p>Durante a Guerra Fria, adotou uma postura firme contra o comunismo, reforçando alianças estratégicas e a defesa nacional.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Governança</span>
+      <span>Conservadorismo</span>
+    </div>
+  </div>
+
+</div>
+
+  <h2 class="section-title">Síntese dos <span>Princípios</span></h2>
+  
+<div class="quote-carousel">
+
+  <div class="quote-item active">
+    <p class="quote-text">"A ciência é o grande antídoto contra o veneno do entusiasmo e da superstição."</p>
+    <p class="quote-author">— Adam Smith</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O espírito de inovação é a essência da humanidade."</p>
+    <p class="quote-author">— Elon Musk</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O progresso acontece quando as pessoas não desistem."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A única limitação em nossa realização de amanhã são nossas dúvidas e hesitações hoje."</p>
+    <p class="quote-author">— Franklin D. Roosevelt</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O engenheiro é aquele que faz funcionar o impossível."</p>
+    <p class="quote-author">— Henry Petroski</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O maior obstáculo para o progresso é a burocracia."</p>
+    <p class="quote-author">— Ludwig von Mises</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Toda inovação começa com uma ideia ousada."</p>
+    <p class="quote-author">— Jeff Bezos</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A curiosidade é o motor da descoberta científica."</p>
+    <p class="quote-author">— Marie Curie</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Não podemos resolver nossos problemas com o mesmo pensamento que usamos quando os criamos."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A disciplina é a ponte entre metas e realizações."</p>
+    <p class="quote-author">— Jim Rohn</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O segredo do sucesso é a constância do propósito."</p>
+    <p class="quote-author">— Benjamin Disraeli</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O valor de uma ideia reside em sua utilização."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O importante é não parar de questionar."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A maior glória não está em nunca cair, mas em levantar-se a cada queda."</p>
+    <p class="quote-author">— Confúcio</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O verdadeiro progresso é o progresso da humanidade."</p>
+    <p class="quote-author">— Herbert Spencer</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A genialidade é 1% inspiração e 99% transpiração."</p>
+    <p class="quote-author">— Thomas Edison</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"É mais importante saber onde você vai do que saber de onde você vem."</p>
+    <p class="quote-author">— Michel Foucault</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"O homem que move uma montanha começa carregando pequenas pedras."</p>
+    <p class="quote-author">— Confúcio</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"A ciência sem religião é manca; a religião sem ciência é cega."</p>
+    <p class="quote-author">— Albert Einstein</p>
+  </div>
+
+  <div class="quote-item">
+    <p class="quote-text">"Nada na vida deve ser temido, apenas compreendido."</p>
+    <p class="quote-author">— Marie Curie</p>
+  </div>
+
+</div>
+
+<div class="experts-container">
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon"><span data-icon="rocket"></span></div>
+      <h3 class="expert-name">Elon Musk</h3>
+      <p class="expert-title">Empreendedor | CEO SpaceX & Tesla</p>
+    </div>
+    <div class="expert-body">
+      <h4>Aprendizado Rápido</h4>
+      <p>Musk é conhecido por ler livros de forma intensa e aprender rapidamente sobre áreas complexas, da física à engenharia aeroespacial.</p>
+      
+      <h4>Falhar Rápido e Barato</h4>
+      <p>Ele enfatiza prototipagem rápida e testes constantes para aprender com falhas e ajustar estratégias rapidamente.</p>
+      
+      <h4>Visão Ambiciosa</h4>
+      <p>Tem como meta resolver problemas globais, como energia renovável e colonização de Marte, guiando sua inovação.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Tecnologia</span>
+      <span>Inovação</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">🧬</div> <!-- DNA -->
+      <h3 class="expert-name">Jennifer Doudna</h3>
+      <p class="expert-title">Bioquímica | CRISPR Pioneira</p>
+    </div>
+    <div class="expert-body">
+      <h4>Curiosidade Científica</h4>
+      <p>Focada na exploração de novos territórios da genética, Jennifer investiga os limites do possível com ferramentas inovadoras.</p>
+      
+      <h4>Colaboração Multidisciplinar</h4>
+      <p>Trabalha com equipes diversas, combinando biologia, química e ética para avançar em terapias genéticas.</p>
+      
+      <h4>Impacto Social</h4>
+      <p>Preocupa-se com as implicações éticas da edição genética e promove debates globais sobre o tema.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Genética</span>
+      <span>Ética</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">🖥️</div> <!-- PC -->
+      <h3 class="expert-name">Fei-Fei Li</h3>
+      <p class="expert-title">Cientista da Computação | IA e Visão Computacional</p>
+    </div>
+    <div class="expert-body">
+      <h4>Construção de Dados</h4>
+      <p>Defendeu a criação de grandes bases de dados para treinar inteligências artificiais com precisão e ética.</p>
+      
+      <h4>IA Ética</h4>
+      <p>Incentiva a pesquisa em inteligência artificial responsável para evitar vieses e impactos negativos.</p>
+      
+      <h4>Educação e Inclusão</h4>
+      <p>Promove acesso amplo ao aprendizado de IA para diversas comunidades, reduzindo a desigualdade tecnológica.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">IA</span>
+      <span>Ética</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">🤖</div> <!-- Robo -->
+      <h3 class="expert-name">Demis Hassabis</h3>
+      <p class="expert-title">Cofundador | DeepMind</p>
+    </div>
+    <div class="expert-body">
+      <h4>Inteligência Artificial Avançada</h4>
+      <p>Lidera pesquisas que combinam IA e aprendizado profundo para resolver problemas complexos, como jogos e biomedicina.</p>
+      
+      <h4>Interdisciplinaridade</h4>
+      <p>Une neurociência, matemática e computação para desenvolver algoritmos inspirados no cérebro humano.</p>
+      
+      <h4>Foco em Soluções Práticas</h4>
+      <p>Busca aplicações reais da IA, desde diagnósticos médicos até eficiência energética.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">IA</span>
+      <span>Pesquisa</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+    <div class="expert-header">
+      <div class="expert-icon">👩🏻‍🚀</div> <!-- espacial -->
+      <h3 class="expert-name">Katherine Johnson</h3>
+      <p class="expert-title">Matemática | NASA</p>
+    </div>
+    <div class="expert-body">
+      <h4>Precisão Matemática</h4>
+      <p>Contribuiu com cálculos fundamentais para trajetórias de voo espacial com exatidão rigorosa.</p>
+      
+      <h4>Resiliência</h4>
+      <p>Superou barreiras sociais e raciais para tornar-se uma pioneira em seu campo.</p>
+      
+      <h4>Trabalho em Equipe</h4>
+      <p>Colaborou intensamente com engenheiros e cientistas para garantir missões espaciais seguras.</p>
+    </div>
+    <div class="expert-footer">
+      <span class="expert-tag">Matemática</span>
+      <span>Espaço</span>
+    </div>
+  </div>
+
+  <div class="expert-card">
+  <div class="expert-header">
+    <div class="expert-icon">👨‍💻</div>
+    <h3 class="expert-name">Tim Berners-Lee</h3>
+    <p class="expert-title">Cientista da Computação | Inventor da Web</p>
+  </div>
+  <div class="expert-body">
+    <h4>Visão de Rede Aberta</h4>
+    <p>Defendeu a web como um espaço aberto e livre para acesso universal à informação, promovendo a colaboração global.</p>
+    
+    <h4>Inovação Pioneira</h4>
+    <p>Desenvolveu os protocolos fundamentais (HTTP, HTML, URLs) que formam a base da internet moderna.</p>
+    
+    <h4>Ética Digital</h4>
+    <p>Atua pela ética no uso da internet, privacidade e direitos digitais, influenciando políticas e práticas globais.</p>
+  </div>
+  <div class="expert-footer">
+    <span class="expert-tag">Computação</span>
+    <span>Internet</span>
+  </div>
+</div>
+
+</div>
+
+  <div class="experts-container">
+    <div class="expert-card" style="grid-column: span 2;">
+      <div class="expert-header">
+        <h3 class="expert-name">Os 7 Princípios dos Grandes Aprendizes</h3>
+      </div>
+      <div class="expert-body">
+        <h4>1. Curiosidade Insaciável (Da Vinci)</h4>
+        <p>Formule perguntas constantemente. Mantenha um caderno de perguntas sobre tudo que você encontra. A verdadeira aprendizagem começa com "Por que?"</p>
+        
+        <h4>2. Experimentação Ativa (Edison)</h4>
+        <p>Não apenas consuma conhecimento—experimente. Teste hipóteses, faça projetos, construa protótipos. O conhecimento vem da ação, não da passividade.</p>
+        
+        <h4>3. Visualização Profunda (Tesla)</h4>
+        <p>Desenvolva a capacidade de visualizar conceitos complexos em sua mente. Feche os olhos e "veja" processos científicos, estruturas matemáticas ou sistemas históricos.</p>
+        
+        <h4>4. Ensino como Aprendizado (Feynman)</h4>
+        <p>Explique o que aprendeu para outras pessoas. Se não conseguir explicar claramente, você não entende completamente. Use o "Método Feynman" para testar seu entendimento.</p>
+        
+        <h4>5. Registro Sistemático (Curie)</h4>
+        <p>Mantenha um diário de aprendizagem detalhado. Registre não apenas o que aprendeu, mas como aprendeu, suas dúvidas, erros e insights.</p>
+        
+        <h4>6. Interconexão do Conhecimento (Einstein)</h4>
+        <p>Estude múltiplas disciplinas. A inovação acontece na interseção de campos diferentes. Um conhecimento de arte melhora a ciência, e vice-versa.</p>
+        
+        <h4>7. Perseverança Inabalável (Edison)</h4>
+        <p>Mantenha-se diante de obstáculos. Cada "fracasso" é um passo para o sucesso. Desenvolva resiliência como um músculo que se fortalece com o uso.</p>
+      </div>
+      <div class="expert-footer">
+        <span>Aplicação Universal</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2025 MBS Estudo+. Todos os direitos reservados.</p>
+      <p>As estratégias dos maiores mentes da história, adaptadas para o aprendizado moderno</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botão para alternar tema -->
+<div class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro">
+  <span data-icon="light"></span>
+</div>
+
+<script>
+ // Alternar menu mobile
+  document.querySelector('.mobile-toggle')?.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // Fechar menu ao clicar em um link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.remove('active');
+    });
+  });
+
+  // Alternar tema claro/escuro
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+  // Atualizar emoji
+  const icon = document.getElementById('theme-icon');
+  icon.textContent = isDark ? '☀️' : '🌙';
+}
+
+window.addEventListener('load', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // Atualizar emoji do botão
+  const icon = document.getElementById('theme-icon');
+  icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+});
+
+</script>
+<script>
+  const quotes = document.querySelectorAll('.quote-item');
+  let currentQuote = 0;
+
+  function showNextQuote() {
+    quotes[currentQuote].classList.remove('active');
+    currentQuote = (currentQuote + 1) % quotes.length;
+    quotes[currentQuote].classList.add('active');
+  }
+
+  setInterval(showNextQuote, 8000); // troca a cada 8 segundos
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modoPremium = localStorage.getItem('modoPremium') === 'true';
+
+    if (!modoPremium) {
+      // Usuário não é premium — redirecionar para a página de ativação ou home
+      alert('Esta página é exclusiva para usuários Premium. Faça a ativação para acessar.');
+      window.location.href = 'index.html'; // ou qualquer página que desejar
+    }
+  });
+</script>
+
+</body>
+</html>

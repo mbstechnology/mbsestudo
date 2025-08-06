@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cronograma de Estudos | MBS Estudo+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+/* Estilos básicos */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: var(--primary, #4361ee);
+  color: white;
+  padding: 15px 0;
+}
+
+.nav-container {
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  margin-top: 0px;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: var(--primary-light, #4cc9f0);
+}
+
+/* Toggle (☰) escondido no desktop */
+.mobile-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background-color: var(--primary, #4361ee);
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-links.show {
+    display: flex;
+    animation: slideDown 0.3s ease-in-out forwards;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+/* Animação do menu mobile */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Responsivo: Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #1e1e2f;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .nav-links.open {
+    max-height: 500px; /* Altura suficiente para todos os links */
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+    :root {
+      --primary: #4361ee;
+      --primary-light: #4cc9f0;
+      --secondary: #3f37c9;
+      --success: #38b000;
+      --warning: #ff8700;
+      --danger: #d90429;
+      --bg: #f8f9ff;
+      --bg-light: #f0f2f7;
+      --card: #ffffff;
+      --card-hover: #fafbff;
+      --text: #212529;
+      --text-light: #6c757d;
+      --border: #e0e6ef;
+      --border-light: #dee2e6;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode {
+      --bg: #121212;
+      --bg-light: #1e1e1e;
+      --card: #1e1e1e;
+      --card-hover: #2d2d2d;
+      --text: #f8f9fa;
+      --text-light: #adb5bd;
+      --border: #333333;
+      --border-light: #495057;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      background-image:
+        linear-gradient(rgba(67, 97, 238, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(67, 97, 238, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      transition: background-color 0.3s var(--transition);
+      padding-top: 70px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(67, 97, 238, 0.1);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      border: 3px solid var(--card);
+      z-index: 100;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+    }
+
+    .cronograma {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .dia {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      height: auto;
+    }
+
+    .dia::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 4px 4px 0 0;
+    }
+
+    .dia:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    .dia h2 {
+      margin: 0 0 20px;
+      font-size: 1.5rem;
+      color: var(--secondary);
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+
+    .tarefas {
+      margin: 15px 0;
+      list-style: none;
+      padding: 0;
+      flex: 1;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .tarefas li {
+      background: var(--primary);
+      color: white;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(67, 97, 238, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-left: 4px solid var(--primary-light);
+      user-select: none;
+    }
+
+    .tarefas li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .tarefas li::before {
+      content: '📚';
+      margin-right: 10px;
+      opacity: 0.8;
+    }
+
+    .tarefas button {
+      background: rgba(255, 255, 255, 0.25);
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    .tarefas button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px 16px;
+      margin: 0;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border);
+      font-size: 1rem;
+      background-color: var(--bg-light);
+      color: var(--text);
+      outline: none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    .add-btn {
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+      user-select: none;
+    }
+
+    .add-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .add-btn::before {
+      content: '+';
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      padding: 20px;
+      margin: 10px 0;
+      background: rgba(67, 97, 238, 0.03);
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border);
+      user-select: none;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      user-select: none;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .cronograma {
+        gap: 20px;
+      }
+
+      .dia {
+        padding: 25px 20px;
+      }
+
+      .header-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 40px 20px;
+      }
+    }
+
+    /* Scrollbar estilizado para .dia */
+    .dia::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .dia::-webkit-scrollbar-track {
+      background: var(--bg-light);
+      border-radius: 4px;
+    }
+
+    .dia::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    .dia::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary);
+    }
+
+    /* Animação pulsante para botão principal */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<nav>
+  <div class="nav-container container">
+    <div class="logo">MBS Estudo+</div>
+    <ul class="nav-links">
+      <li><a href="index.html#inicio">🏠 Início</a></li>
+      <li><a href="index.html#funcionalidades">🔧 Funcionalidades</a></li>
+      <li><a href="index.html#planos">💎 Planos Premium</a></li>
+      <li><a href="index.html#ativacao">🔑 Ativação</a></li>
+      <li><a href="index.html#sobre">ℹ️ Sobre</a></li>
+      <li><a href="index.html#contato">📬 Contato</a></li>
+    </ul>
+    <div class="mobile-toggle" aria-label="Toggle Menu" role="button" tabindex="0">☰</div>
+  </div>
+</nav>
+
+<body>
+  <div class="container">
+    <h1>📅 Cronograma de Estudos</h1>
+
+    <div class="header-actions">
+      <button class="btn btn-primary pulse" onclick="adicionarTarefaParaTodos()">
+        <span>+</span> Adicionar para Todos
+      </button>
+      <button class="btn btn-outline" onclick="limparTudo()">
+        🗑️ Limpar Tudo
+      </button>
+    </div>
+
+    <div class="cronograma" id="cronograma">
+      <!-- Dias da semana serão inseridos aqui via JS -->
+    </div>
+
+    <footer>
+      MBS Technology – Estudo+ v1.0 | Offline & Gratuito | 
+      <a href="mailto:suporte@mbstechnology.com.br">suporte@mbstechnology.com.br</a>
+    </footer>
+  </div>
+
+  <div class="theme-toggle" onclick="toggleTheme()">🌓</div>
+
+  <script src="ativo.js"></script>
+  <script>
+    // Lê modo premium do localStorage ao iniciar
+    let modoPremium = localStorage.getItem('modoPremium') === 'true';
+    console.log('Modo premium ao carregar:', modoPremium);
+
+    window.addEventListener('premiumStatusChanged', e => {
+      modoPremium = e.detail.premium;
+      localStorage.setItem('modoPremium', modoPremium ? 'true' : 'false');
+      console.log('Premium ativado via evento?', modoPremium);
+    });
+
+    const diasSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    const cronogramaContainer = document.getElementById('cronograma');
+
+    let dados = JSON.parse(localStorage.getItem('cronograma')) || {};
+
+    // Cria as colunas e carrega tarefas salvas
+    diasSemana.forEach(dia => {
+      const diaDiv = document.createElement('div');
+      diaDiv.className = 'dia';
+      diaDiv.innerHTML = `
+        <h2>${dia}</h2>
+        <ul class="tarefas" id="tarefas-${dia}">
+          <li class="empty-state">Nenhuma tarefa</li>
+        </ul>
+        <div class="input-group">
+          <input type="text" placeholder="Adicionar tarefa..." id="input-${dia}" onkeypress="if(event.key==='Enter')addTarefa('${dia}')">
+          <button class="add-btn" onclick="addTarefa('${dia}')"></button>
+        </div>
+      `;
+      cronogramaContainer.appendChild(diaDiv);
+
+      if (dados[dia] && dados[dia].length > 0) {
+        document.getElementById(`tarefas-${dia}`).innerHTML = '';
+        dados[dia].forEach(tarefa => criarItem(dia, tarefa));
+      }
+    });
+
+    function criarItem(dia, texto) {
+      const ul = document.getElementById(`tarefas-${dia}`);
+
+      const emptyState = ul.querySelector('.empty-state');
+      if (emptyState) ul.removeChild(emptyState);
+
+      const textoEscapado = texto.replace(/'/g, "\\'");
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${texto}</span> <button onclick="removerTarefa('${dia}', '${textoEscapado}')">×</button>`;
+      ul.appendChild(li);
+    }
+
+    function addTarefa(dia) {
+  const input = document.getElementById(`input-${dia}`);
+  const texto = input.value.trim();
+  if (texto === '') return;
+
+  if (!dados[dia]) dados[dia] = [];
+
+  if (!modoPremium && dados[dia].length >= 5) {
+    alert('No modo gratuito, você pode adicionar até 5 tarefas por dia. Faça upgrade para ilimitado.');
+    return;
+  }
+
+  dados[dia].push(texto);
+  salvar();
+  criarItem(dia, texto);
+  input.value = '';
+}
+
+    function removerTarefa(dia, texto) {
+      if (!dados[dia]) return;
+      dados[dia] = dados[dia].filter(tarefa => tarefa !== texto);
+      salvar();
+      atualizarLista();
+    }
+
+    function atualizarLista() {
+      diasSemana.forEach(dia => {
+        const ul = document.getElementById(`tarefas-${dia}`);
+        ul.innerHTML = '';
+        if (dados[dia] && dados[dia].length > 0) {
+          dados[dia].forEach(tarefa => criarItem(dia, tarefa));
+        } else {
+          const emptyState = document.createElement('li');
+          emptyState.className = 'empty-state';
+          emptyState.textContent = 'Nenhuma tarefa';
+          ul.appendChild(emptyState);
+        }
+      });
+    }
+
+    function salvar() {
+      localStorage.setItem('cronograma', JSON.stringify(dados));
+    }
+
+    function limparTudo() {
+      if (confirm('Tem certeza que deseja limpar todas as tarefas de todos os dias?')) {
+        dados = {};
+        localStorage.removeItem('cronograma');
+        atualizarLista();
+      }
+    }
+
+    function adicionarTarefaParaTodos() {
+      const tarefa = prompt('Digite a tarefa que deseja adicionar para todos os dias:');
+      if (!tarefa || tarefa.trim() === '') return;
+
+      for (const dia of diasSemana) {
+        if (!dados[dia]) dados[dia] = [];
+        if (!modoPremium && dados[dia].length >= 5) {
+          alert(`No modo gratuito, não é possível adicionar a tarefa para todos os dias porque o dia ${dia} já possui 5 tarefas.`);
+          return;
+        }
+      }
+
+      diasSemana.forEach(dia => {
+        dados[dia].push(tarefa.trim());
+      });
+      salvar();
+      atualizarLista();
+      alert(`Tarefa "${tarefa}" adicionada para todos os dias!`);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+    });
+  </script>
+<script>
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // Acessibilidade: toggle com tecla Enter
+  toggleBtn.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      navLinks.classList.toggle('show');
+    }
+  });
+</script>
+</body>
+</html>

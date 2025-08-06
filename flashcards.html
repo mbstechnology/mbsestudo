@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flashcards Inteligentes - MBS Estudo+</title>
+<style>
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --secondary: #3f37c9;
+  --success: #4cc9f0;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --card-bg: #ffffff;
+  --bg: #f8fafc;
+  --text: #333333;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark-mode {
+  --primary: #4895ef;
+  --primary-dark: #3b82f6;
+  --secondary: #4361ee;
+  --success: #48cae4;
+  --light: #121212;
+  --dark: #f8f9fa;
+  --card-bg: #1e293b;
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --text-light: #94a3b8;
+  --border: #334155;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: var(--transition);
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navigation */
+nav {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 28px;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.mobile-toggle:hover {
+  background-color: rgba(67, 97, 238, 0.1);
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 100px 0 60px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sections */
+section {
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+  color: var(--text);
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-title span {
+  color: var(--primary);
+}
+
+/* Flashcards */
+.flashcard-container {
+  max-width: 650px;
+  margin: 0 auto 50px;
+  position: relative;
+}
+
+.flashcard {
+  width: 300px;
+  height: 180px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 15px;
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  backface-visibility: hidden;
+}
+
+.flashcard-front {
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.flashcard-back {
+  background: var(--primary);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.flashcard:hover {
+  transform: translateY(-5px);
+}
+
+.flashcard-front::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flashcard-front::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.flashcard-front::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.flashcard-front h3, .flashcard-back h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.flashcard-front p, .flashcard-back p {
+  margin: 0;
+  line-height: 1.7;
+  font-weight: 400;
+  text-align: center;
+}
+
+.flashcard-controls {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.flashcard-btn {
+  padding: 14px 28px;
+  background: var(--card-bg);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  min-width: 120px;
+  box-shadow: var(--shadow-sm);
+}
+
+.flashcard-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.flashcard-btn:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.flashcard-btn#flipCard {
+  background: var(--primary);
+  color: white;
+  border: none;
+}
+
+.flashcard-btn#flipCard:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.card-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Formulário para criar flashcard */
+.create-flashcard {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 650px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.create-flashcard h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  min-height: 100px;
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  background: linear-gradient(135deg, var(--primary-dark), #2563eb);
+}
+
+.submit-btn:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Contador de flashcards */
+.card-counter {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+.card-counter strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Premium badge */
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--success);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(76, 201, 240, 0.3);
+}
+
+/* Footer */
+footer {
+  background: var(--card-bg);
+  padding: 40px 0;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--border);
+  transition: var(--transition);
+  z-index: 100;
+  animation: float 3s ease-in-out infinite;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    background: var(--card-bg);
+    width: 100%;
+    height: calc(100vh - 70px);
+    padding: 40px 20px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+  }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  
+  .nav-links li {
+    margin: 18px 0;
+  }
+  
+  .nav-links a {
+    font-size: 1.1rem;
+    padding: 12px 0;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .flashcard-container {
+    margin-bottom: 40px;
+  }
+  
+  .flashcard {
+    height: 250px;
+  }
+  
+  .flashcard-front, .flashcard-back {
+    padding: 25px;
+    font-size: 1.1rem;
+  }
+  
+  .create-flashcard {
+    padding: 30px 20px;
+  }
+  
+  .theme-toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Icons */
+[data-icon="home"]::before { content: "🏠"; }
+[data-icon="features"]::before { content: "🔧"; }
+[data-icon="premium"]::before { content: "💎"; }
+[data-icon="activation"]::before { content: "🔑"; }
+[data-icon="about"]::before { content: "ℹ️"; }
+[data-icon="contact"]::before { content: "📬"; }
+[data-icon="light"]::before { content: "☀️"; }
+[data-icon="dark"]::before { content: "🌙"; }
+[data-icon="star"]::before { content: "⭐"; }
+[data-icon="delete"]::before { content: "🗑️"; }
+[data-icon="edit"]::before { content: "✏️"; }
+[data-icon="category"]::before { content: "📚"; }
+[data-icon="check"]::before { content: "✓"; }
+[data-icon="close"]::before { content: "×"; }
+
+/* Study Categories */
+.categories-container {
+  max-width: 650px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.category-tag {
+  padding: 8px 16px;
+  background: var(--primary);
+  color: white;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.category-tag:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.category-tag.active {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* Edit Modal */
+.edit-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-modal.active {
+  display: flex;
+}
+
+.edit-modal-content {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.edit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.edit-modal-header h3 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.edit-modal-close {
+  background: #ef4444;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.edit-modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.edit-modal-btn.cancel {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.edit-modal-btn.cancel:hover {
+  background: #e2e8f0;
+}
+
+.edit-modal-btn.save {
+  background: var(--primary);
+  color: white;
+}
+
+.edit-modal-btn.save:hover {
+  background: var(--primary-dark);
+}
+</style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+<nav>
+  <div class="nav-container container">
+        <a href="index.html" class="logo">
+        <span>MBS Estudo+</span>
+        </a>
+        <ul class="nav-links">
+        <li><a href="index.html" data-icon="home">Início</a></li>
+        <li><a href="index.html#funcionalidades" data-icon="features">Funcionalidades</a></li>
+        <li><a href="index.html#planos" data-icon="premium">Planos Premium</a></li>
+        <li><a href="index.html#ativacao" data-icon="activation">Ativação</a></li>
+        <li><a href="index.html#sobre" data-icon="about">Sobre</a></li>
+        <li><a href="index.html#contato" data-icon="contact">Contato</a></li>
+        </ul>
+        <button class="mobile-toggle" aria-label="Toggle Menu">☰</button>
+  </div>
+</nav>
+<section class="hero-section">
+  <div class="container hero-content fade-in-up">
+    <h1>Flashcards Inteligentes</h1>
+    <p>Crie cartões de estudo com perguntas e respostas para revisão eficaz de conteúdos importantes, com design moderno e experiência otimizada.</p>
+    <div class="premium-badge"><span data-icon="star"></span> Premium (5 matérias)</div>
+  </div>
+</section>
+<main class="container">
+  <h2 class="section-title">Seus <span>Flashcards</span></h2>
+  
+  <div class="categories-container">
+    <div class="category-tag active" data-category="all">Todos</div>
+    <div class="category-tag" data-category="matematica">Matemática</div>
+    <div class="category-tag" data-category="historia">História</div>
+    <div class="category-tag" data-category="ciencias">Ciências</div>
+    <div class="category-tag" data-category="linguagens">Linguagens</div>
+  </div>
+
+  <div class="card-counter">
+    Você tem <strong id="currentCount">0</strong> de <span id="maxCount">5</span> flashcards disponíveis
+  </div>
+  <div class="flashcard-container fade-in-up">
+    <div class="flashcard" id="flashcardExample">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <h3>Pergunta</h3>
+          <p>Clique no botão "Virar" para ver a resposta</p>
+        </div>
+        <div class="flashcard-back">
+          <h3>Resposta</h3>
+          <p>Este é um exemplo de flashcard. Crie seus próprios clicando no botão abaixo!</p>
+        </div>
+      </div>
+    </div>
+    <div class="flashcard-controls">
+      <button class="flashcard-btn" id="prevCard">Anterior</button>
+      <button class="flashcard-btn" id="flipCard">Virar</button>
+      <button class="flashcard-btn" id="nextCard">Próximo</button>
+    </div>
+  </div>
+  <div class="create-flashcard fade-in-up" style="animation-delay: 0.2s">
+    <h2>Criar Novo Flashcard</h2>
+    <div class="form-group">
+      <label for="categorySelect">Categoria</label>
+      <select id="categorySelect" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+        <option value="matematica">Matemática</option>
+        <option value="historia">História</option>
+        <option value="ciencias">Ciências</option>
+        <option value="linguagens">Linguagens</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="question">Pergunta</label>
+      <textarea id="question" placeholder="Digite a pergunta aqui..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="answer">Resposta</label>
+      <textarea id="answer" placeholder="Digite a resposta aqui..." rows="4"></textarea>
+    </div>
+    <button class="submit-btn" id="createCardBtn">Adicionar Flashcard</button>
+  </div>
+  <div id="flashcardsList" style="margin-top: 50px;"></div>
+</main>
+
+<!-- Modal de Edição -->
+<div class="edit-modal" id="editModal">
+  <div class="edit-modal-content">
+    <div class="edit-modal-header">
+      <h3>Editar Flashcard</h3>
+      <button class="edit-modal-close" id="closeEditModal" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="form-group">
+      <label for="editCategorySelect">Categoria</label>
+      <select id="editCategorySelect" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+        <option value="matematica">Matemática</option>
+        <option value="historia">História</option>
+        <option value="ciencias">Ciências</option>
+        <option value="linguagens">Linguagens</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="editQuestion">Pergunta</label>
+      <textarea id="editQuestion" placeholder="Digite a pergunta aqui..." rows="3" style="width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); resize: vertical; min-height: 80px; font-size: 1rem; transition: var(--transition); outline: none;"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editAnswer">Resposta</label>
+      <textarea id="editAnswer" placeholder="Digite a resposta aqui..." rows="4" style="width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); resize: vertical; min-height: 100px; font-size: 1rem; transition: var(--transition); outline: none;"></textarea>
+    </div>
+    <div class="edit-modal-footer">
+      <button class="edit-modal-btn cancel" id="cancelEdit">Cancelar</button>
+      <button class="edit-modal-btn save" id="saveEdit">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2025 MBS Estudo+. Todos os direitos reservados.</p>
+      <p>Transformando seu aprendizado com tecnologia inteligente</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botão para alternar tema -->
+<div class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro">
+  <span data-icon="light"></span>
+</div>
+
+<script>
+    fetch('header.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('header-placeholder').innerHTML = html);
+
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('footer-placeholder').innerHTML = html);
+  // Estado do aplicativo
+  let storedDataRaw = localStorage.getItem('flashcards');
+  let flashcards = [];
+  let isPremium = false;
+  let currentCategory = 'all';
+  let editIndex = null;
+  
+  if (storedDataRaw) {
+    try {
+      const storedData = JSON.parse(storedDataRaw);
+      if (storedData && Array.isArray(storedData.cartoes)) {
+        flashcards = storedData.cartoes;
+      }
+      if (storedData && typeof storedData.modoPremium === 'boolean') {
+        isPremium = storedData.modoPremium;
+      }
+    } catch (e) {
+      flashcards = [];
+    }
+  }
+  
+  // Adicionar categorias padrão se não existirem
+  flashcards.forEach(card => {
+    if (!card.category) {
+      card.category = 'matematica';
+    }
+  });
+  
+  let currentIndex = 0;
+  
+  // Elementos do DOM
+  const flashcardsList = document.getElementById('flashcardsList');
+  const createCardBtn = document.getElementById('createCardBtn');
+  const questionInput = document.getElementById('question');
+  const answerInput = document.getElementById('answer');
+  const categorySelect = document.getElementById('categorySelect');
+  const currentCountEl = document.getElementById('currentCount');
+  const maxCountEl = document.getElementById('maxCount');
+  const prevCardBtn = document.getElementById('prevCard');
+  const nextCardBtn = document.getElementById('nextCard');
+  const flipCardBtn = document.getElementById('flipCard');
+  const flashcardExample = document.getElementById('flashcardExample');
+  const themeToggle = document.querySelector('.theme-toggle');
+  const categoryTags = document.querySelectorAll('.category-tag');
+  const editModal = document.getElementById('editModal');
+  const closeEditModal = document.getElementById('closeEditModal');
+  const cancelEdit = document.getElementById('cancelEdit');
+  const saveEdit = document.getElementById('saveEdit');
+  const editQuestion = document.getElementById('editQuestion');
+  const editAnswer = document.getElementById('editAnswer');
+  const editCategorySelect = document.getElementById('editCategorySelect');
+  
+  // Configurar limite de flashcards
+  const MAX_FREE_CARDS = 5;
+  const MAX_PREMIUM_CARDS = 100; // Valor alto para simular "ilimitado"
+  
+  // Atualizar contador
+  function updateCounter() {
+    const max = isPremium ? MAX_PREMIUM_CARDS : MAX_FREE_CARDS;
+    currentCountEl.textContent = flashcards.length;
+    maxCountEl.textContent = max;
+    createCardBtn.disabled = flashcards.length >= max;
+  }
+  
+  // Salvar flashcards no localStorage
+  function saveFlashcards() {
+    const dataToSave = {
+      cartoes: flashcards,
+      modoPremium: isPremium
+    };
+    localStorage.setItem('flashcards', JSON.stringify(dataToSave));
+  }
+  
+  // Filtrar flashcards por categoria
+  function getFilteredFlashcards() {
+    if (currentCategory === 'all') {
+      return flashcards;
+    }
+    return flashcards.filter(card => card.category === currentCategory);
+  }
+  
+  // Renderizar lista de flashcards
+  function renderFlashcardsList() {
+    flashcardsList.innerHTML = '';
+    const filteredFlashcards = getFilteredFlashcards();
+    
+    if (filteredFlashcards.length === 0) {
+      flashcardsList.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: var(--text-light); background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); margin-top: 20px;">
+          <div style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;">📚</div>
+          <p style="font-size: 1.1rem; margin-bottom: 20px;">Nenhum flashcard encontrado nesta categoria.</p>
+          <p>Crie o seu primeiro cartão acima e comece a estudar de forma inteligente!</p>
+        </div>
+      `;
+      return;
+    }
+    
+    filteredFlashcards.forEach((card, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.className = 'tool-card';
+      cardElement.style.marginBottom = '25px';
+      cardElement.style.animation = `fadeInUp 0.6s ease-out forwards`;
+      cardElement.style.animationDelay = `${0.1 * index}s`;
+      
+      // Encontrar o índice original no array completo
+      const originalIndex = flashcards.findIndex(f => 
+        f.question === card.question && f.answer === card.answer && f.category === card.category
+      );
+      
+      cardElement.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 15px; background: var(--card-bg); border-radius: var(--radius-sm); border: 1px solid var(--border);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;">${index + 1}</div>
+            <div>
+              <h3 style="color: var(--primary); margin: 0; font-size: 1.2rem;">Flashcard</h3>
+              <span style="background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-top: 4px; display: inline-block;">${getCategoryName(card.category)}</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="edit-btn" data-index="${originalIndex}" aria-label="Editar flashcard" style="background: var(--primary); color: white; width: 36px; height: 36px; border: none; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: var(--transition); display: flex; align-items: center; justify-content: center;" title="Editar flashcard">
+              <span data-icon="edit"></span>
+            </button>
+            <button class="delete-note" data-index="${originalIndex}" aria-label="Excluir flashcard" style="background: #ef4444; color: white; width: 36px; height: 36px; border: none; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: var(--transition); display: flex; align-items: center; justify-content: center;" title="Excluir flashcard">
+              <span data-icon="delete"></span>
+            </button>
+          </div>
+        </div>
+        <div class="flashcard" data-index="${originalIndex}" style="margin-top: 0;">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <h3>Pergunta</h3>
+              <p>${card.question}</p>
+            </div>
+            <div class="flashcard-back">
+              <h3>Resposta</h3>
+              <p>${card.answer}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      flashcardsList.appendChild(cardElement);
+    });
+    
+    // Adicionar eventos aos botões de exclusão
+    document.querySelectorAll('.delete-note').forEach(button => {
+      button.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        deleteFlashcard(index);
+      });
+      
+      // Efeitos de hover
+      button.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.boxShadow = '0 4px 12px rgba(239, 68, 68, 0.3)';
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = 'none';
+      });
+    });
+    
+    // Adicionar eventos aos botões de edição
+    document.querySelectorAll('.edit-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        openEditModal(index);
+      });
+      
+      // Efeitos de hover
+      button.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.boxShadow = '0 4px 12px rgba(67, 97, 238, 0.3)';
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = 'none';
+      });
+    });
+    
+    // Adicionar eventos aos flashcards para virar
+    document.querySelectorAll('.flashcard[data-index]').forEach(card => {
+      card.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+      });
+    });
+  }
+  
+  // Obter nome da categoria
+  function getCategoryName(categoryKey) {
+    const categories = {
+      'matematica': 'Matemática',
+      'historia': 'História',
+      'ciencias': 'Ciências',
+      'linguagens': 'Linguagens'
+    };
+    return categories[categoryKey] || categoryKey;
+  }
+  
+  // Abrir modal de edição
+  function openEditModal(index) {
+    editIndex = index;
+    const card = flashcards[index];
+    editQuestion.value = card.question;
+    editAnswer.value = card.answer;
+    editCategorySelect.value = card.category;
+    editModal.classList.add('active');
+  }
+  
+  // Fechar modal de edição
+  function closeEditModalFn() {
+    editModal.classList.remove('active');
+    editIndex = null;
+  }
+  
+  // Criar novo flashcard
+  function createFlashcard() {
+    const question = questionInput.value.trim();
+    const answer = answerInput.value.trim();
+    const category = categorySelect.value;
+    
+    if (!question || !answer) {
+      alert('Por favor, preencha tanto a pergunta quanto a resposta.');
+      return;
+    }
+    
+    const maxCards = isPremium ? MAX_PREMIUM_CARDS : MAX_FREE_CARDS;
+    if (flashcards.length >= maxCards) {
+      alert(`Você atingiu o limite de ${isPremium ? 'ilimitado' : MAX_FREE_CARDS} flashcards no seu plano atual.`);
+      return;
+    }
+    
+    flashcards.push({ 
+      question, 
+      answer, 
+      category: category || 'matematica',
+      createdAt: new Date().toISOString()
+    });
+    
+    saveFlashcards();
+    questionInput.value = '';
+    answerInput.value = '';
+    updateCounter();
+    renderFlashcardsList();
+    renderCurrentFlashcard();
+  }
+  
+  // Salvar edição
+  function saveEditChanges() {
+    if (editIndex === null) return;
+    
+    const question = editQuestion.value.trim();
+    const answer = editAnswer.value.trim();
+    const category = editCategorySelect.value;
+    
+    if (!question || !answer) {
+      alert('Por favor, preencha tanto a pergunta quanto a resposta.');
+      return;
+    }
+    
+    flashcards[editIndex] = {
+      ...flashcards[editIndex],
+      question,
+      answer,
+      category,
+      updatedAt: new Date().toISOString()
+    };
+    
+    saveFlashcards();
+    closeEditModalFn();
+    renderFlashcardsList();
+    renderCurrentFlashcard();
+  }
+  
+  // Deletar flashcard
+  function deleteFlashcard(index) {
+    if (confirm('Tem certeza que deseja excluir este flashcard?')) {
+      flashcards.splice(index, 1);
+      saveFlashcards();
+      updateCounter();
+      renderFlashcardsList();
+      
+      // Se estivermos visualizando o flashcard excluído, ajustar o índice
+      if (currentIndex >= flashcards.length && flashcards.length > 0) {
+        currentIndex = flashcards.length - 1;
+      }
+      renderCurrentFlashcard();
+    }
+  }
+  
+  // Renderizar o flashcard atual no visualizador principal
+  function renderCurrentFlashcard() {
+    if (flashcards.length === 0) {
+      flashcardExample.style.display = 'none';
+      return;
+    }
+    
+    flashcardExample.style.display = 'block';
+    const card = flashcards[currentIndex];
+    
+    // Remover classe flipped para garantir que está no lado da frente
+    flashcardExample.classList.remove('flipped');
+    
+    // Atualizar conteúdo
+    const front = flashcardExample.querySelector('.flashcard-front h3');
+    const frontP = flashcardExample.querySelector('.flashcard-front p');
+    const back = flashcardExample.querySelector('.flashcard-back h3');
+    const backP = flashcardExample.querySelector('.flashcard-back p');
+    
+    front.textContent = 'Pergunta';
+    frontP.textContent = card.question;
+    back.textContent = 'Resposta';
+    backP.textContent = card.answer;
+  }
+  
+  // Navegar para o flashcard anterior
+  function prevFlashcard() {
+    if (flashcards.length === 0) return;
+    currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+    renderCurrentFlashcard();
+  }
+  
+  // Navegar para o próximo flashcard
+  function nextFlashcard() {
+    if (flashcards.length === 0) return;
+    currentIndex = (currentIndex + 1) % flashcards.length;
+    renderCurrentFlashcard();
+  }
+  
+  // Virar o flashcard atual
+  function flipCurrentFlashcard() {
+    if (flashcards.length === 0) return;
+    flashcardExample.classList.toggle('flipped');
+  }
+  
+  // Alternar menu mobile
+  document.querySelector('.mobile-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+  
+  // Fechar menu ao clicar em um link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.remove('active');
+    });
+  });
+  
+  // Alternar categorias
+  categoryTags.forEach(tag => {
+    tag.addEventListener('click', function() {
+      // Remover classe active de todos
+      categoryTags.forEach(t => t.classList.remove('active'));
+      // Adicionar classe active ao clicado
+      this.classList.add('active');
+      // Atualizar categoria atual
+      currentCategory = this.getAttribute('data-category');
+      // Renderizar lista filtrada
+      renderFlashcardsList();
+    });
+  });
+  
+  // Alternar tema claro/escuro
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    
+    // Atualizar ícone
+    const icon = themeToggle.querySelector('span');
+    icon.setAttribute('data-icon', theme === 'dark' ? 'light' : 'dark');
+    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+  
+  // Carregar tema salvo
+  window.addEventListener('load', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+    
+    // Atualizar ícone do tema
+    const icon = themeToggle.querySelector('span');
+    icon.setAttribute('data-icon', savedTheme === 'dark' ? 'light' : 'dark');
+    icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    
+    // Verificar se é premium
+    if (localStorage.getItem('premium') === 'true') {
+      document.querySelector('.premium-badge').innerHTML = '<span data-icon="star"></span> Premium (Ilimitado)';
+      isPremium = true;
+    }
+    
+    // Inicializar
+    updateCounter();
+    renderFlashcardsList();
+    renderCurrentFlashcard();
+  });
+  
+  // Event listeners
+  createCardBtn.addEventListener('click', createFlashcard);
+  prevCardBtn.addEventListener('click', prevFlashcard);
+  nextCardBtn.addEventListener('click', nextFlashcard);
+  flipCardBtn.addEventListener('click', flipCurrentFlashcard);
+  
+  // Modal de edição
+  closeEditModal.addEventListener('click', closeEditModalFn);
+  cancelEdit.addEventListener('click', closeEditModalFn);
+  saveEdit.addEventListener('click', saveEditChanges);
+  
+  // Permitir criar flashcard com Enter
+  questionInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      answerInput.focus();
+    }
+  });
+  
+  answerInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      createFlashcard();
+    }
+  });
+  
+  // Efeitos de hover nos botões
+  document.querySelectorAll('.flashcard-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+      if (!this.disabled) {
+        this.style.transform = 'translateY(-3px)';
+      }
+    });
+    
+    btn.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+    });
+  });
+</script>
+<div id="footer-placeholder"></div>
+</body>
+</html>
