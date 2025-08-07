@@ -25,7 +25,6 @@
   --radius-lg: 20px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .dark-mode {
   --primary: #4895ef;
   --primary-dark: #3b82f6;
@@ -41,14 +40,12 @@
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
-
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -56,14 +53,12 @@ body {
   transition: var(--transition);
   min-height: 100vh;
 }
-
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
-
 /* Navigation */
 nav {
   background-color: var(--card-bg);
@@ -74,30 +69,34 @@ nav {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
 }
-
 .logo {
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--primary);
+  text-decoration: none;
 }
-
+.logo span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-icon {
+  font-size: 1.8rem;
+}
 .nav-links {
   display: flex;
   list-style: none;
   align-items: center;
 }
-
 .nav-links li {
   margin-left: 28px;
 }
-
 .nav-links a {
   color: var(--text);
   text-decoration: none;
@@ -110,11 +109,9 @@ nav {
   gap: 6px;
   font-size: 0.95rem;
 }
-
 .nav-links a:hover {
   color: var(--primary);
 }
-
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -125,11 +122,9 @@ nav {
   background-color: var(--primary);
   transition: var(--transition);
 }
-
 .nav-links a:hover::after {
   width: 100%;
 }
-
 .mobile-toggle {
   display: none;
   font-size: 1.5rem;
@@ -141,11 +136,9 @@ nav {
   border-radius: 8px;
   transition: var(--transition);
 }
-
 .mobile-toggle:hover {
   background-color: rgba(67, 97, 238, 0.1);
 }
-
 /* Hero Section */
 .hero-section {
   padding: 100px 0 60px;
@@ -155,7 +148,6 @@ nav {
   position: relative;
   overflow: hidden;
 }
-
 .hero-section::before {
   content: '';
   position: absolute;
@@ -166,14 +158,12 @@ nav {
   background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
   pointer-events: none;
 }
-
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 .hero-content h1 {
   font-size: 3.2rem;
   margin-bottom: 20px;
@@ -181,7 +171,6 @@ nav {
   font-weight: 800;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
@@ -190,12 +179,10 @@ nav {
   margin-left: auto;
   margin-right: auto;
 }
-
 /* Sections */
 section {
   padding: 80px 0;
 }
-
 .section-title {
   text-align: center;
   margin-bottom: 50px;
@@ -204,7 +191,6 @@ section {
   font-weight: 700;
   position: relative;
 }
-
 .section-title::after {
   content: '';
   position: absolute;
@@ -216,18 +202,15 @@ section {
   background: var(--primary);
   border-radius: 2px;
 }
-
 .section-title span {
   color: var(--primary);
 }
-
 /* Flashcards */
 .flashcard-container {
   max-width: 650px;
   margin: 0 auto 50px;
   position: relative;
 }
-
 .flashcard {
   width: 300px;
   height: 180px;
@@ -236,8 +219,12 @@ section {
   margin-bottom: 20px;
   border-radius: 15px;
   box-shadow: var(--shadow);
+  transition: var(--transition);
 }
-
+.flashcard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
 .flashcard-inner {
   position: relative;
   width: 100%;
@@ -245,12 +232,11 @@ section {
   transition: transform 0.6s;
   transform-style: preserve-3d;
   border-radius: 15px;
+  overflow: hidden;
 }
-
 .flashcard.flipped .flashcard-inner {
   transform: rotateY(180deg);
 }
-
 .flashcard-front,
 .flashcard-back {
   position: absolute;
@@ -260,56 +246,43 @@ section {
   box-sizing: border-box;
   border-radius: 15px;
   backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
 }
-
 .flashcard-front {
   background: var(--card-bg);
   color: var(--text);
+  border: 1px solid var(--border);
 }
-
 .flashcard-back {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   transform: rotateY(180deg);
 }
-
-.flashcard:hover {
-  transform: translateY(-5px);
-}
-
-.flashcard-front::-webkit-scrollbar {
-  width: 6px;
-}
-
-.flashcard-front::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-.flashcard-front::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
-
 .flashcard-front h3, .flashcard-back h3 {
   margin: 0 0 15px 0;
   font-size: 1.5rem;
   font-weight: 600;
 }
-
 .flashcard-front p, .flashcard-back p {
   margin: 0;
   line-height: 1.7;
   font-weight: 400;
-  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .flashcard-controls {
   display: flex;
   justify-content: center;
   gap: 18px;
   margin-top: 30px;
 }
-
 .flashcard-btn {
   padding: 14px 28px;
   background: var(--card-bg);
@@ -322,55 +295,40 @@ section {
   transition: var(--transition);
   min-width: 120px;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
-
-.flashcard-btn:hover {
+.flashcard-btn:hover:not(:disabled) {
   background: var(--primary);
   color: white;
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
-
 .flashcard-btn:disabled {
   background: #f1f5f9;
   color: #94a3b8;
   border-color: #e2e8f0;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
-
 .flashcard-btn#flipCard {
   background: var(--primary);
   color: white;
   border: none;
+  box-shadow: var(--shadow);
 }
-
-.flashcard-btn#flipCard:hover {
+.flashcard-btn#flipCard:hover:not(:disabled) {
   background: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
-
-.card-inner {
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  position: relative;
+.flashcard-btn svg {
+  width: 18px;
+  height: 18px;
 }
-
-.card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  backface-visibility: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-}
-
 /* Formulário para criar flashcard */
 .create-flashcard {
   background: var(--card-bg);
@@ -383,7 +341,6 @@ section {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-
 .create-flashcard h2 {
   margin-bottom: 30px;
   text-align: center;
@@ -391,11 +348,9 @@ section {
   font-size: 1.8rem;
   font-weight: 700;
 }
-
 .form-group {
   margin-bottom: 25px;
 }
-
 .form-group label {
   display: block;
   margin-bottom: 12px;
@@ -403,7 +358,6 @@ section {
   color: var(--text);
   font-size: 1.1rem;
 }
-
 .form-group textarea {
   width: 100%;
   padding: 16px;
@@ -416,13 +370,28 @@ section {
   font-size: 1rem;
   transition: var(--transition);
   outline: none;
+  font-family: inherit;
 }
-
 .form-group textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
-
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+  font-family: inherit;
+}
+.form-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
 .submit-btn {
   width: 100%;
   padding: 16px;
@@ -435,15 +404,12 @@ section {
   cursor: pointer;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
-  font-weight: 600;
 }
-
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
   background: linear-gradient(135deg, var(--primary-dark), #2563eb);
 }
-
 .submit-btn:disabled {
   background: #e2e8f0;
   color: #94a3b8;
@@ -451,7 +417,6 @@ section {
   transform: none;
   box-shadow: none;
 }
-
 /* Contador de flashcards */
 .card-counter {
   text-align: center;
@@ -460,12 +425,10 @@ section {
   color: var(--text-light);
   font-size: 1.1rem;
 }
-
 .card-counter strong {
   color: var(--primary);
   font-weight: 700;
 }
-
 /* Premium badge */
 .premium-badge {
   display: inline-flex;
@@ -479,8 +442,13 @@ section {
   font-weight: 600;
   margin-top: 15px;
   box-shadow: 0 2px 8px rgba(76, 201, 240, 0.3);
+  animation: pulse 2s infinite;
 }
-
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
 /* Footer */
 footer {
   background: var(--card-bg);
@@ -491,7 +459,6 @@ footer {
   color: var(--text-light);
   margin-top: 80px;
 }
-
 .footer-content {
   max-width: 600px;
   margin: 0 auto;
@@ -499,7 +466,6 @@ footer {
   flex-direction: column;
   gap: 15px;
 }
-
 /* Theme toggle button */
 .theme-toggle {
   position: fixed;
@@ -521,23 +487,19 @@ footer {
   z-index: 100;
   animation: float 3s ease-in-out infinite;
 }
-
 .theme-toggle:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
-
 /* Responsive */
 @media (max-width: 768px) {
   .mobile-toggle {
     display: block;
   }
-  
   .nav-links {
     position: fixed;
     top: 70px;
@@ -551,49 +513,40 @@ footer {
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
     z-index: 99;
   }
-  
   .nav-links.active {
     right: 0;
   }
-  
   .nav-links li {
     margin: 18px 0;
   }
-  
   .nav-links a {
     font-size: 1.1rem;
     padding: 12px 0;
   }
-  
   .hero-content h1 {
     font-size: 2.5rem;
   }
-  
   .hero-content p {
     font-size: 1.1rem;
   }
-  
   .section-title {
     font-size: 2.2rem;
   }
-  
   .flashcard-container {
     margin-bottom: 40px;
   }
-  
   .flashcard {
-    height: 250px;
+    height: 220px;
   }
-  
   .flashcard-front, .flashcard-back {
-    padding: 25px;
-    font-size: 1.1rem;
+    padding: 15px;
   }
-  
+  .flashcard-front p, .flashcard-back p {
+    font-size: 0.95rem;
+  }
   .create-flashcard {
     padding: 30px 20px;
   }
-  
   .theme-toggle {
     width: 50px;
     height: 50px;
@@ -601,8 +554,14 @@ footer {
     bottom: 20px;
     right: 20px;
   }
+  .flashcard-controls {
+    gap: 12px;
+  }
+  .flashcard-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
 }
-
 /* Animation */
 @keyframes fadeInUp {
   from {
@@ -614,11 +573,9 @@ footer {
     transform: translateY(0);
   }
 }
-
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
-
 /* Icons */
 [data-icon="home"]::before { content: "🏠"; }
 [data-icon="features"]::before { content: "🔧"; }
@@ -634,7 +591,6 @@ footer {
 [data-icon="category"]::before { content: "📚"; }
 [data-icon="check"]::before { content: "✓"; }
 [data-icon="close"]::before { content: "×"; }
-
 /* Study Categories */
 .categories-container {
   max-width: 650px;
@@ -644,11 +600,11 @@ footer {
   gap: 10px;
   justify-content: center;
 }
-
 .category-tag {
   padding: 8px 16px;
-  background: var(--primary);
-  color: white;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 30px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -656,19 +612,18 @@ footer {
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
 }
-
 .category-tag:hover {
-  background: var(--primary-dark);
+  background: var(--primary);
+  color: white;
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
-
 .category-tag.active {
-  background: var(--secondary);
+  background: var(--primary);
+  color: white;
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
-
 /* Edit Modal */
 .edit-modal {
   display: none;
@@ -681,12 +636,11 @@ footer {
   z-index: 1000;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(5px);
 }
-
 .edit-modal.active {
   display: flex;
 }
-
 .edit-modal-content {
   background: var(--card-bg);
   padding: 30px;
@@ -697,20 +651,20 @@ footer {
   max-height: 90vh;
   overflow-y: auto;
 }
-
 .edit-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
-
 .edit-modal-header h3 {
   color: var(--primary);
   font-size: 1.5rem;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-
 .edit-modal-close {
   background: #ef4444;
   color: white;
@@ -723,15 +677,18 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: var(--transition);
 }
-
+.edit-modal-close:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
 .edit-modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   margin-top: 20px;
 }
-
 .edit-modal-btn {
   padding: 10px 20px;
   border: none;
@@ -739,43 +696,157 @@ footer {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  font-size: 0.95rem;
+  min-width: 90px;
 }
-
 .edit-modal-btn.cancel {
   background: #f1f5f9;
   color: #64748b;
+  border: 1px solid var(--border);
 }
-
 .edit-modal-btn.cancel:hover {
   background: #e2e8f0;
 }
-
 .edit-modal-btn.save {
   background: var(--primary);
   color: white;
+  box-shadow: var(--shadow-sm);
 }
-
 .edit-modal-btn.save:hover {
   background: var(--primary-dark);
+  box-shadow: var(--shadow);
+}
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-light);
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-top: 20px;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  opacity: 0.3;
+}
+.empty-state h3 {
+  color: var(--text);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+.empty-state p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+/* Flashcard List */
+.flashcards-list {
+  margin-top: 30px;
+}
+.tool-card {
+  margin-bottom: 25px;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.card-header:hover {
+  box-shadow: var(--shadow);
+}
+.card-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.card-number {
+  background: var(--primary);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.card-title {
+  color: var(--primary);
+  margin: 0;
+  font-size: 1.2rem;
+}
+.card-category {
+  background: var(--secondary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: inline-block;
+}
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+.card-action-btn {
+  background: var(--card-bg);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+.card-action-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.card-action-btn.delete {
+  background: #f87171;
+  color: white;
+  border-color: #f87171;
+}
+.card-action-btn.delete:hover {
+  background: #ef4444;
+  border-color: #ef4444;
 }
 </style>
 </head>
 <body>
-    <div id="header-placeholder"></div>
 <nav>
   <div class="nav-container container">
-        <a href="index.html" class="logo">
-        <span>MBS Estudo+</span>
-        </a>
-        <ul class="nav-links">
-        <li><a href="index.html" data-icon="home">Início</a></li>
-        <li><a href="index.html" data-icon="features">Funcionalidades</a></li>
-        <li><a href="index.html" data-icon="premium">Planos Premium</a></li>
-        <li><a href="index.html" data-icon="activation">Ativação</a></li>
-        <li><a href="index.html" data-icon="about">Sobre</a></li>
-        <li><a href="index.html" data-icon="contact">Contato</a></li>
-        </ul>
-        <button class="mobile-toggle" aria-label="Toggle Menu">☰</button>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">📚</span>
+      <span>MBS Estudo+</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-icon="home">Início</a></li>
+      <li><a href="index.html" data-icon="features">Funcionalidades</a></li>
+      <li><a href="index.html" data-icon="premium">Planos Premium</a></li>
+      <li><a href="index.html" data-icon="activation">Ativação</a></li>
+      <li><a href="index.html" data-icon="about">Sobre</a></li>
+      <li><a href="index.html" data-icon="contact">Contato</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Toggle Menu">☰</button>
   </div>
 </nav>
 <section class="hero-section">
@@ -787,7 +858,6 @@ footer {
 </section>
 <main class="container">
   <h2 class="section-title">Seus <span>Flashcards</span></h2>
-  
   <div class="categories-container">
     <div class="category-tag active" data-category="all">Todos</div>
     <div class="category-tag" data-category="matematica">Matemática</div>
@@ -795,7 +865,6 @@ footer {
     <div class="category-tag" data-category="ciencias">Ciências</div>
     <div class="category-tag" data-category="linguagens">Linguagens</div>
   </div>
-
   <div class="card-counter">
     Você tem <strong id="currentCount">0</strong> de <span id="maxCount">5</span> flashcards disponíveis
   </div>
@@ -813,16 +882,32 @@ footer {
       </div>
     </div>
     <div class="flashcard-controls">
-      <button class="flashcard-btn" id="prevCard">Anterior</button>
-      <button class="flashcard-btn" id="flipCard">Virar</button>
-      <button class="flashcard-btn" id="nextCard">Próximo</button>
+      <button class="flashcard-btn" id="prevCard">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        Anterior
+      </button>
+      <button class="flashcard-btn" id="flipCard">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 4v16h20V4H1zm0 0h22M1 20H1M23 4v16M23 4H1"/>
+          <path d="M8 12h8"/>
+        </svg>
+        Virar
+      </button>
+      <button class="flashcard-btn" id="nextCard">
+        Próximo
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
     </div>
   </div>
   <div class="create-flashcard fade-in-up" style="animation-delay: 0.2s">
     <h2>Criar Novo Flashcard</h2>
     <div class="form-group">
       <label for="categorySelect">Categoria</label>
-      <select id="categorySelect" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+      <select id="categorySelect">
         <option value="matematica">Matemática</option>
         <option value="historia">História</option>
         <option value="ciencias">Ciências</option>
@@ -839,19 +924,18 @@ footer {
     </div>
     <button class="submit-btn" id="createCardBtn">Adicionar Flashcard</button>
   </div>
-  <div id="flashcardsList" style="margin-top: 50px;"></div>
+  <div id="flashcardsList" class="flashcards-list"></div>
 </main>
-
 <!-- Modal de Edição -->
 <div class="edit-modal" id="editModal">
   <div class="edit-modal-content">
     <div class="edit-modal-header">
-      <h3>Editar Flashcard</h3>
-      <button class="edit-modal-close" id="closeEditModal" aria-label="Fechar">&times;</button>
+      <h3 data-icon="edit">Editar Flashcard</h3>
+      <button class="edit-modal-close" id="closeEditModal" aria-label="Fechar">×</button>
     </div>
     <div class="form-group">
       <label for="editCategorySelect">Categoria</label>
-      <select id="editCategorySelect" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+      <select id="editCategorySelect">
         <option value="matematica">Matemática</option>
         <option value="historia">História</option>
         <option value="ciencias">Ciências</option>
@@ -860,11 +944,11 @@ footer {
     </div>
     <div class="form-group">
       <label for="editQuestion">Pergunta</label>
-      <textarea id="editQuestion" placeholder="Digite a pergunta aqui..." rows="3" style="width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); resize: vertical; min-height: 80px; font-size: 1rem; transition: var(--transition); outline: none;"></textarea>
+      <textarea id="editQuestion" placeholder="Digite a pergunta aqui..." rows="3"></textarea>
     </div>
     <div class="form-group">
       <label for="editAnswer">Resposta</label>
-      <textarea id="editAnswer" placeholder="Digite a resposta aqui..." rows="4" style="width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); resize: vertical; min-height: 100px; font-size: 1rem; transition: var(--transition); outline: none;"></textarea>
+      <textarea id="editAnswer" placeholder="Digite a resposta aqui..." rows="4"></textarea>
     </div>
     <div class="edit-modal-footer">
       <button class="edit-modal-btn cancel" id="cancelEdit">Cancelar</button>
@@ -872,7 +956,6 @@ footer {
     </div>
   </div>
 </div>
-
 <footer>
   <div class="container">
     <div class="footer-content">
@@ -881,84 +964,44 @@ footer {
     </div>
   </div>
 </footer>
-
 <!-- Botão para alternar tema -->
 <div class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro">
-  <span data-icon="light"></span>
+  <span data-icon="light">☀️</span>
 </div>
-
 <script>
-    fetch('header.html')
-    .then(res => res.text())
-    .then(html => document.getElementById('header-placeholder').innerHTML = html);
-
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(html => document.getElementById('footer-placeholder').innerHTML = html);
   // Estado do aplicativo
-  let storedDataRaw = localStorage.getItem('flashcards');
   let flashcards = [];
   let isPremium = false;
   let currentCategory = 'all';
   let editIndex = null;
-  
-  if (storedDataRaw) {
-    try {
-      const storedData = JSON.parse(storedDataRaw);
-      if (storedData && Array.isArray(storedData.cartoes)) {
-        flashcards = storedData.cartoes;
-      }
-      if (storedData && typeof storedData.modoPremium === 'boolean') {
-        isPremium = storedData.modoPremium;
-      }
-    } catch (e) {
-      flashcards = [];
-    }
-  }
-  
-  // Adicionar categorias padrão se não existirem
-  flashcards.forEach(card => {
-    if (!card.category) {
-      card.category = 'matematica';
-    }
-  });
-  
   let currentIndex = 0;
-  
-  // Elementos do DOM
-  const flashcardsList = document.getElementById('flashcardsList');
-  const createCardBtn = document.getElementById('createCardBtn');
-  const questionInput = document.getElementById('question');
-  const answerInput = document.getElementById('answer');
-  const categorySelect = document.getElementById('categorySelect');
-  const currentCountEl = document.getElementById('currentCount');
-  const maxCountEl = document.getElementById('maxCount');
-  const prevCardBtn = document.getElementById('prevCard');
-  const nextCardBtn = document.getElementById('nextCard');
-  const flipCardBtn = document.getElementById('flipCard');
-  const flashcardExample = document.getElementById('flashcardExample');
-  const themeToggle = document.querySelector('.theme-toggle');
-  const categoryTags = document.querySelectorAll('.category-tag');
-  const editModal = document.getElementById('editModal');
-  const closeEditModal = document.getElementById('closeEditModal');
-  const cancelEdit = document.getElementById('cancelEdit');
-  const saveEdit = document.getElementById('saveEdit');
-  const editQuestion = document.getElementById('editQuestion');
-  const editAnswer = document.getElementById('editAnswer');
-  const editCategorySelect = document.getElementById('editCategorySelect');
-  
-  // Configurar limite de flashcards
-  const MAX_FREE_CARDS = 5;
-  const MAX_PREMIUM_CARDS = 100; // Valor alto para simular "ilimitado"
-  
-  // Atualizar contador
-  function updateCounter() {
-    const max = isPremium ? MAX_PREMIUM_CARDS : MAX_FREE_CARDS;
-    currentCountEl.textContent = flashcards.length;
-    maxCountEl.textContent = max;
-    createCardBtn.disabled = flashcards.length >= max;
+
+  // Carregar dados do localStorage
+  function loadFlashcards() {
+    const storedDataRaw = localStorage.getItem('flashcards');
+    if (storedDataRaw) {
+      try {
+        const storedData = JSON.parse(storedDataRaw);
+        if (storedData && Array.isArray(storedData.cartoes)) {
+          flashcards = storedData.cartoes;
+        }
+        if (storedData && typeof storedData.modoPremium === 'boolean') {
+          isPremium = storedData.modoPremium;
+        }
+      } catch (e) {
+        console.error('Erro ao carregar flashcards:', e);
+        flashcards = [];
+      }
+    }
+
+    // Adicionar categorias padrão se não existirem
+    flashcards.forEach(card => {
+      if (!card.category) {
+        card.category = 'matematica';
+      }
+    });
   }
-  
+
   // Salvar flashcards no localStorage
   function saveFlashcards() {
     const dataToSave = {
@@ -967,7 +1010,19 @@ footer {
     };
     localStorage.setItem('flashcards', JSON.stringify(dataToSave));
   }
-  
+
+  // Configurar limite de flashcards
+  const MAX_FREE_CARDS = 5;
+  const MAX_PREMIUM_CARDS = 100;
+
+  // Atualizar contador
+  function updateCounter() {
+    const max = isPremium ? MAX_PREMIUM_CARDS : MAX_FREE_CARDS;
+    document.getElementById('currentCount').textContent = flashcards.length;
+    document.getElementById('maxCount').textContent = max;
+    document.getElementById('createCardBtn').disabled = flashcards.length >= max;
+  }
+
   // Filtrar flashcards por categoria
   function getFilteredFlashcards() {
     if (currentCategory === 'all') {
@@ -975,54 +1030,56 @@ footer {
     }
     return flashcards.filter(card => card.category === currentCategory);
   }
-  
+
   // Renderizar lista de flashcards
   function renderFlashcardsList() {
+    const flashcardsList = document.getElementById('flashcardsList');
     flashcardsList.innerHTML = '';
+    
     const filteredFlashcards = getFilteredFlashcards();
     
     if (filteredFlashcards.length === 0) {
       flashcardsList.innerHTML = `
-        <div style="text-align: center; padding: 40px; color: var(--text-light); background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); margin-top: 20px;">
-          <div style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;">📚</div>
-          <p style="font-size: 1.1rem; margin-bottom: 20px;">Nenhum flashcard encontrado nesta categoria.</p>
-          <p>Crie o seu primeiro cartão acima e comece a estudar de forma inteligente!</p>
+        <div class="empty-state">
+          <div class="empty-state-icon">📚</div>
+          <h3>Nenhum flashcard encontrado</h3>
+          <p>Nenhum flashcard encontrado nesta categoria. Crie o seu primeiro cartão acima e comece a estudar de forma inteligente!</p>
         </div>
       `;
       return;
     }
-    
+
     filteredFlashcards.forEach((card, index) => {
-      const cardElement = document.createElement('div');
-      cardElement.className = 'tool-card';
-      cardElement.style.marginBottom = '25px';
-      cardElement.style.animation = `fadeInUp 0.6s ease-out forwards`;
-      cardElement.style.animationDelay = `${0.1 * index}s`;
-      
       // Encontrar o índice original no array completo
       const originalIndex = flashcards.findIndex(f => 
-        f.question === card.question && f.answer === card.answer && f.category === card.category
+        f.question === card.question && 
+        f.answer === card.answer && 
+        f.category === card.category
       );
-      
+
+      const cardElement = document.createElement('div');
+      cardElement.className = 'tool-card';
+      cardElement.style.animationDelay = `${0.1 * index}s`;
+
       cardElement.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 15px; background: var(--card-bg); border-radius: var(--radius-sm); border: 1px solid var(--border);">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;">${index + 1}</div>
+        <div class="card-header">
+          <div class="card-info">
+            <div class="card-number">${index + 1}</div>
             <div>
-              <h3 style="color: var(--primary); margin: 0; font-size: 1.2rem;">Flashcard</h3>
-              <span style="background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-top: 4px; display: inline-block;">${getCategoryName(card.category)}</span>
+              <h3 class="card-title">Flashcard</h3>
+              <span class="card-category">${getCategoryName(card.category)}</span>
             </div>
           </div>
-          <div style="display: flex; gap: 10px;">
-            <button class="edit-btn" data-index="${originalIndex}" aria-label="Editar flashcard" style="background: var(--primary); color: white; width: 36px; height: 36px; border: none; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: var(--transition); display: flex; align-items: center; justify-content: center;" title="Editar flashcard">
-              <span data-icon="edit"></span>
+          <div class="card-actions">
+            <button class="card-action-btn edit-btn" data-index="${originalIndex}" aria-label="Editar flashcard">
+              <span data-icon="edit">✏️</span>
             </button>
-            <button class="delete-note" data-index="${originalIndex}" aria-label="Excluir flashcard" style="background: #ef4444; color: white; width: 36px; height: 36px; border: none; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: var(--transition); display: flex; align-items: center; justify-content: center;" title="Excluir flashcard">
-              <span data-icon="delete"></span>
+            <button class="card-action-btn delete" data-index="${originalIndex}" aria-label="Excluir flashcard">
+              <span data-icon="delete">🗑️</span>
             </button>
           </div>
         </div>
-        <div class="flashcard" data-index="${originalIndex}" style="margin-top: 0;">
+        <div class="flashcard" data-index="${originalIndex}">
           <div class="flashcard-inner">
             <div class="flashcard-front">
               <h3>Pergunta</h3>
@@ -1035,47 +1092,25 @@ footer {
           </div>
         </div>
       `;
+
       flashcardsList.appendChild(cardElement);
     });
-    
-    // Adicionar eventos aos botões de exclusão
-    document.querySelectorAll('.delete-note').forEach(button => {
+
+    // Adicionar eventos aos botões
+    document.querySelectorAll('.delete').forEach(button => {
       button.addEventListener('click', function() {
         const index = parseInt(this.getAttribute('data-index'));
         deleteFlashcard(index);
       });
-      
-      // Efeitos de hover
-      button.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-        this.style.boxShadow = '0 4px 12px rgba(239, 68, 68, 0.3)';
-      });
-      
-      button.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.boxShadow = 'none';
-      });
     });
-    
-    // Adicionar eventos aos botões de edição
+
     document.querySelectorAll('.edit-btn').forEach(button => {
       button.addEventListener('click', function() {
         const index = parseInt(this.getAttribute('data-index'));
         openEditModal(index);
       });
-      
-      // Efeitos de hover
-      button.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-        this.style.boxShadow = '0 4px 12px rgba(67, 97, 238, 0.3)';
-      });
-      
-      button.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-        this.style.boxShadow = 'none';
-      });
     });
-    
+
     // Adicionar eventos aos flashcards para virar
     document.querySelectorAll('.flashcard[data-index]').forEach(card => {
       card.addEventListener('click', function() {
@@ -1083,7 +1118,7 @@ footer {
       });
     });
   }
-  
+
   // Obter nome da categoria
   function getCategoryName(categoryKey) {
     const categories = {
@@ -1094,47 +1129,51 @@ footer {
     };
     return categories[categoryKey] || categoryKey;
   }
-  
+
   // Abrir modal de edição
   function openEditModal(index) {
     editIndex = index;
     const card = flashcards[index];
-    editQuestion.value = card.question;
-    editAnswer.value = card.answer;
-    editCategorySelect.value = card.category;
-    editModal.classList.add('active');
+    document.getElementById('editQuestion').value = card.question;
+    document.getElementById('editAnswer').value = card.answer;
+    document.getElementById('editCategorySelect').value = card.category;
+    document.getElementById('editModal').classList.add('active');
   }
-  
+
   // Fechar modal de edição
-  function closeEditModalFn() {
-    editModal.classList.remove('active');
+  function closeEditModal() {
+    document.getElementById('editModal').classList.remove('active');
     editIndex = null;
   }
-  
+
   // Criar novo flashcard
   function createFlashcard() {
+    const questionInput = document.getElementById('question');
+    const answerInput = document.getElementById('answer');
+    const categorySelect = document.getElementById('categorySelect');
+    
     const question = questionInput.value.trim();
     const answer = answerInput.value.trim();
     const category = categorySelect.value;
-    
+
     if (!question || !answer) {
       alert('Por favor, preencha tanto a pergunta quanto a resposta.');
       return;
     }
-    
+
     const maxCards = isPremium ? MAX_PREMIUM_CARDS : MAX_FREE_CARDS;
     if (flashcards.length >= maxCards) {
       alert(`Você atingiu o limite de ${isPremium ? 'ilimitado' : MAX_FREE_CARDS} flashcards no seu plano atual.`);
       return;
     }
-    
+
     flashcards.push({ 
       question, 
       answer, 
       category: category || 'matematica',
       createdAt: new Date().toISOString()
     });
-    
+
     saveFlashcards();
     questionInput.value = '';
     answerInput.value = '';
@@ -1142,20 +1181,20 @@ footer {
     renderFlashcardsList();
     renderCurrentFlashcard();
   }
-  
+
   // Salvar edição
   function saveEditChanges() {
     if (editIndex === null) return;
     
-    const question = editQuestion.value.trim();
-    const answer = editAnswer.value.trim();
-    const category = editCategorySelect.value;
-    
+    const question = document.getElementById('editQuestion').value.trim();
+    const answer = document.getElementById('editAnswer').value.trim();
+    const category = document.getElementById('editCategorySelect').value;
+
     if (!question || !answer) {
       alert('Por favor, preencha tanto a pergunta quanto a resposta.');
       return;
     }
-    
+
     flashcards[editIndex] = {
       ...flashcards[editIndex],
       question,
@@ -1163,13 +1202,13 @@ footer {
       category,
       updatedAt: new Date().toISOString()
     };
-    
+
     saveFlashcards();
-    closeEditModalFn();
+    closeEditModal();
     renderFlashcardsList();
     renderCurrentFlashcard();
   }
-  
+
   // Deletar flashcard
   function deleteFlashcard(index) {
     if (confirm('Tem certeza que deseja excluir este flashcard?')) {
@@ -1178,28 +1217,36 @@ footer {
       updateCounter();
       renderFlashcardsList();
       
-      // Se estivermos visualizando o flashcard excluído, ajustar o índice
+      // Ajustar índice atual se necessário
       if (currentIndex >= flashcards.length && flashcards.length > 0) {
         currentIndex = flashcards.length - 1;
       }
       renderCurrentFlashcard();
     }
   }
-  
+
   // Renderizar o flashcard atual no visualizador principal
   function renderCurrentFlashcard() {
+    const flashcardExample = document.getElementById('flashcardExample');
+    const prevCardBtn = document.getElementById('prevCard');
+    const nextCardBtn = document.getElementById('nextCard');
+    
     if (flashcards.length === 0) {
       flashcardExample.style.display = 'none';
+      prevCardBtn.disabled = true;
+      nextCardBtn.disabled = true;
       return;
     }
-    
+
     flashcardExample.style.display = 'block';
-    const card = flashcards[currentIndex];
+    prevCardBtn.disabled = false;
+    nextCardBtn.disabled = false;
     
     // Remover classe flipped para garantir que está no lado da frente
     flashcardExample.classList.remove('flipped');
     
     // Atualizar conteúdo
+    const card = flashcards[currentIndex];
     const front = flashcardExample.querySelector('.flashcard-front h3');
     const frontP = flashcardExample.querySelector('.flashcard-front p');
     const back = flashcardExample.querySelector('.flashcard-back h3');
@@ -1210,44 +1257,44 @@ footer {
     back.textContent = 'Resposta';
     backP.textContent = card.answer;
   }
-  
+
   // Navegar para o flashcard anterior
   function prevFlashcard() {
     if (flashcards.length === 0) return;
     currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
     renderCurrentFlashcard();
   }
-  
+
   // Navegar para o próximo flashcard
   function nextFlashcard() {
     if (flashcards.length === 0) return;
     currentIndex = (currentIndex + 1) % flashcards.length;
     renderCurrentFlashcard();
   }
-  
+
   // Virar o flashcard atual
   function flipCurrentFlashcard() {
     if (flashcards.length === 0) return;
-    flashcardExample.classList.toggle('flipped');
+    document.getElementById('flashcardExample').classList.toggle('flipped');
   }
-  
+
   // Alternar menu mobile
   document.querySelector('.mobile-toggle').addEventListener('click', function() {
     document.querySelector('.nav-links').classList.toggle('active');
   });
-  
+
   // Fechar menu ao clicar em um link
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       document.querySelector('.nav-links').classList.remove('active');
     });
   });
-  
+
   // Alternar categorias
-  categoryTags.forEach(tag => {
+  document.querySelectorAll('.category-tag').forEach(tag => {
     tag.addEventListener('click', function() {
       // Remover classe active de todos
-      categoryTags.forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
       // Adicionar classe active ao clicado
       this.classList.add('active');
       // Atualizar categoria atual
@@ -1256,7 +1303,7 @@ footer {
       renderFlashcardsList();
     });
   });
-  
+
   // Alternar tema claro/escuro
   function toggleTheme() {
     document.body.classList.toggle('dark-mode');
@@ -1264,55 +1311,59 @@ footer {
     localStorage.setItem('theme', theme);
     
     // Atualizar ícone
-    const icon = themeToggle.querySelector('span');
-    icon.setAttribute('data-icon', theme === 'dark' ? 'light' : 'dark');
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    const themeToggle = document.querySelector('.theme-toggle span');
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    themeToggle.setAttribute('data-icon', theme === 'dark' ? 'light' : 'dark');
   }
-  
+
   // Carregar tema salvo
   window.addEventListener('load', () => {
+    // Carregar dados
+    loadFlashcards();
+    
+    // Carregar tema
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-mode');
     }
     
     // Atualizar ícone do tema
-    const icon = themeToggle.querySelector('span');
-    icon.setAttribute('data-icon', savedTheme === 'dark' ? 'light' : 'dark');
-    icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    const themeToggle = document.querySelector('.theme-toggle span');
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    themeToggle.setAttribute('data-icon', savedTheme === 'dark' ? 'light' : 'dark');
     
-    // Verificar se é premium
+    // Verificar status premium
     if (localStorage.getItem('premium') === 'true') {
       document.querySelector('.premium-badge').innerHTML = '<span data-icon="star"></span> Premium (Ilimitado)';
       isPremium = true;
     }
     
-    // Inicializar
+    // Inicializar interface
     updateCounter();
     renderFlashcardsList();
     renderCurrentFlashcard();
   });
-  
+
   // Event listeners
-  createCardBtn.addEventListener('click', createFlashcard);
-  prevCardBtn.addEventListener('click', prevFlashcard);
-  nextCardBtn.addEventListener('click', nextFlashcard);
-  flipCardBtn.addEventListener('click', flipCurrentFlashcard);
+  document.getElementById('createCardBtn').addEventListener('click', createFlashcard);
+  document.getElementById('prevCard').addEventListener('click', prevFlashcard);
+  document.getElementById('nextCard').addEventListener('click', nextFlashcard);
+  document.getElementById('flipCard').addEventListener('click', flipCurrentFlashcard);
   
   // Modal de edição
-  closeEditModal.addEventListener('click', closeEditModalFn);
-  cancelEdit.addEventListener('click', closeEditModalFn);
-  saveEdit.addEventListener('click', saveEditChanges);
+  document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+  document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
+  document.getElementById('saveEdit').addEventListener('click', saveEditChanges);
   
   // Permitir criar flashcard com Enter
-  questionInput.addEventListener('keypress', function(e) {
+  document.getElementById('question').addEventListener('keypress', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      answerInput.focus();
+      document.getElementById('answer').focus();
     }
   });
   
-  answerInput.addEventListener('keypress', function(e) {
+  document.getElementById('answer').addEventListener('keypress', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       createFlashcard();
@@ -1326,12 +1377,10 @@ footer {
         this.style.transform = 'translateY(-3px)';
       }
     });
-    
     btn.addEventListener('mouseleave', function() {
       this.style.transform = 'translateY(0)';
     });
   });
 </script>
-<div id="footer-placeholder"></div>
 </body>
 </html>
