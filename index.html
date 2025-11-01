@@ -1,781 +1,1381 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MBS Estudo+ – Organize, Foque e Vença</title>
-<style>
-:root {
-  --primary: #4361ee;
-  --secondary: #3f37c9;
-  --success: #4cc9f0;
-  --light: #f8f9fa;
-  --dark: #212529;
-  --card-bg: #ffffff;
-  --bg: #f5f7fb;
-  --text: #333333;
-  --border: #e0e6ef;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.dark-mode {
-  --primary: #4895ef;
-  --secondary: #4361ee;
-  --success: #48cae4;
-  --light: #121212;
-  --dark: #f8f9fa;
-  --card-bg: #1e1e1e;
-  --bg: #121212;
-  --text: #f0f0f0;
-  --border: #333333;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Navigation */
-nav {
-  background-color: var(--card-bg);
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-}
-
-.logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--primary);
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-}
-
-.nav-links li {
-  margin-left: 25px;
-}
-
-.nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-  position: relative;
-}
-
-.nav-links a:hover {
-  color: var(--primary);
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary);
-  transition: width 0.3s;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-.mobile-toggle {
-  display: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* Hero Section */
-#inicio {
-  padding: 100px 0;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  text-align: center;
-}
-
-.hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
-.btn {
-  display: inline-block;
-  background: white;
-  color: var(--primary);
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-  margin: 5px;
-  border: 2px solid white;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.btn-outline {
-  background: transparent;
-  color: white;
-}
-
-.btn-outline:hover {
-  background: white;
-  color: var(--primary);
-}
-
-/* Sections */
-section {
-  padding: 80px 0;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 50px;
-  font-size: 2.2rem;
-  color: var(--text);
-}
-
-.section-title span {
-  color: var(--primary);
-}
-
-/* Features */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.feature-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s;
-  cursor: pointer;
-  border: none;
-  text-align: left;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-}
-
-.feature-icon {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--primary), var(--success));
-  color: white;
-  font-size: 3rem;
-}
-
-.feature-content {
-  padding: 25px;
-}
-
-.feature-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: var(--text);
-}
-
-.premium-badge {
-  display: inline-block;
-  background: var(--success);
-  color: white;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  margin-top: 10px;
-}
-
-/* Pricing */
-.pricing-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.pricing-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  border: 2px solid transparent;
-  transition: all 0.3s;
-}
-
-.pricing-card.popular {
-  border-color: var(--primary);
-  transform: scale(1.05);
-}
-
-.pricing-card.popular .pricing-header {
-  background: var(--primary);
-  color: white;
-}
-
-.pricing-header {
-  padding: 25px;
-  background: var(--light);
-  text-align: center;
-}
-
-.pricing-price {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 15px 0;
-}
-
-.pricing-features {
-  padding: 25px;
-  list-style: none;
-}
-
-.pricing-features li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Activation */
-.activation-container {
-  max-width: 600px;
-  margin: 0 auto;
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-
-.activation-input {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.activation-input input {
-  flex: 1;
-  padding: 12px 15px;
-  border: 2px solid var(--border);
-  border-radius: 8px 0 0 8px;
-  font-size: 1rem;
-  background: var(--bg);
-  color: var(--text);
-}
-
-.activation-input button {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 0 20px;
-  border-radius: 0 8px 8px 0;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
-
-.activation-input button:hover {
-  background: var(--secondary);
-}
-
-#activationMessage {
-  min-height: 24px;
-  font-weight: 500;
-  margin-top: 15px;
-  color: var(--primary);
-}
-
-/* Study Tools */
-.tools-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.tool-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: var(--shadow);
-}
-
-.tool-card h3 {
-  margin-bottom: 20px;
-  color: var(--primary);
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-/* Timer */
-.timer-display {
-  font-size: 3rem;
-  text-align: center;
-  margin: 20px 0;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.timer-controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.timer-btn {
-  padding: 10px 20px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-.timer-btn:hover {
-  background: var(--secondary);
-}
-
-/* Notes */
-#notesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.note {
-  background: var(--primary);
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  min-height: 100px;
-  box-shadow: var(--shadow);
-  position: relative;
-  resize: both;
-  overflow: auto;
-}
-
-.note::after {
-  content: 'Arraste para mover';
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  font-size: 0.7rem;
-  opacity: 0.7;
-}
-
-.delete-note {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Flashcards */
-.flashcard {
-  perspective: 1000px;
-  height: 200px;
-  margin-top: 20px;
-}
-
-.flashcard-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.flashcard.flipped .flashcard-inner {
-  transform: rotateY(180deg);
-}
-
-.flashcard-front, .flashcard-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  font-size: 1.2rem;
-  box-shadow: var(--shadow);
-}
-
-.flashcard-front {
-  background: var(--primary);
-  color: white;
-}
-
-.flashcard-back {
-  background: var(--secondary);
-  color: white;
-  transform: rotateY(180deg);
-}
-
-/* Footer */
-footer {
-  background: var(--card-bg);
-  padding: 30px 0;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  font-size: 0.9rem;
-  color: var(--text);
-}
-
-/* Theme toggle button */
-.theme-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  z-index: 100;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .mobile-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 70px;
-    right: -100%;
-    flex-direction: column;
-    background: var(--card-bg);
-    width: 250px;
-    height: calc(100vh - 70px);
-    padding: 20px;
-    transition: right 0.3s;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-links.active {
-    right: 0;
-  }
-
-  .nav-links li {
-    margin: 15px 0;
-  }
-
-  .hero-content h1 {
-    font-size: 2.2rem;
-  }
-
-  .pricing-card.popular {
-    transform: scale(1);
-  }
-}
-
-.btn-feature {
-  all: unset;
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow - Planner de Estudos</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #6b8cbc;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            border-radius: 0 0 var(--radius) var(--radius);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .premium-badge {
+            background-color: var(--warning);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Timer Styles */
+        .timer-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .timer-modes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .mode-btn {
+            padding: 8px 15px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .timer-settings {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .setting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .setting label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .setting input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        /* Task List Styles */
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        .task-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .task-item.completed {
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            margin-right: 10px;
+        }
+
+        .task-name {
+            flex-grow: 1;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .add-task {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .add-task input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        .add-task button {
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        /* Stats Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Premium Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .premium-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .premium-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .premium-features li:before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .premium-price {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .upgrade-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--warning), #ff9500);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        /* Ad Container */
+        .ad-container {
+            background: #f0f0f0;
+            border: 1px dashed #ccc;
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            color: #666;
+        }
+
+        /* Flashcard Styles */
+        .flashcard {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .flashcard:hover {
+            transform: translateY(-5px);
+        }
+
+        .flashcard-front, .flashcard-back {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flashcard-back {
+            display: none;
+        }
+
+        .flashcard.flipped .flashcard-front {
+            display: none;
+        }
+
+        .flashcard.flipped .flashcard-back {
+            display: block;
+        }
+
+        .flashcard-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .theme-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .theme {
+            padding: 8px 15px;
+            background: #eee;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme.locked {
+            background: #ddd;
+            color: #999;
+            position: relative;
+        }
+
+        .theme.locked:after {
+            content: "🔒";
+            margin-left: 5px;
+        }
+
+        .info-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .info-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 8px;
+        }
+
+        .data-management {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .json-viewer {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
-<nav>
-  <div class="nav-container container">
-    <div class="logo">MBS Estudo+</div>
-    <ul class="nav-links">
-      <li><a href="#inicio">🏠 Início</a></li>
-      <li><a href="#funcionalidades">🔧 Funcionalidades</a></li>
-      <li><a href="#planos">💎 Planos Premium</a></li>
-      <li><a href="#ativacao">🔑 Ativação</a></li>
-      <li><a href="#sobre">ℹ️ Sobre</a></li>
-      <li><a href="#contato">📬 Contato</a></li>
-    </ul>
-    <div class="mobile-toggle" aria-label="Toggle Menu" role="button" tabindex="0">☰</div>
-  </div>
-</nav>
-
-<section id="inicio">
-  <div class="container hero-content">
-    <h1>Organize, Foque e Vença seus Estudos</h1>
-    <p>O MBS Estudo+ é a plataforma definitiva para estudantes que buscam eficiência, organização e resultados excepcionais em seus estudos.</p>
-    <a href="#funcionalidades" class="btn">Começar Agora</a>
-    <a href="#planos" class="btn btn-outline">Torne-se Premium</a>
-  </div>
-</section>
-
-<section id="funcionalidades">
-  <div class="container">
-    <h2 class="section-title">Nossas <span>Funcionalidades</span></h2>
-    <div class="features-grid">
-
-      <button class="feature-card btn-feature" onclick="window.location.href='cronograma.html'">
-        <div class="feature-icon">📅</div>
-        <div class="feature-content">
-          <h3>Cronograma de Estudos</h3>
-          <p>Planeje suas sessões de estudo com um cronograma personalizado e visualize sua progressão ao longo do tempo.</p>
-          <span class="premium-badge">Grátis (5 matérias)</span>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>StudyFlow - Seu Planner de Estudos</h1>
+                <div class="premium-badge" id="premiumBadge">Free</div>
+            </div>
         </div>
-      </button>
+    </header>
 
-      <button class="feature-card btn-feature" onclick="window.location.href='foco.html'">
-        <div class="feature-icon">⏱️</div>
-        <div class="feature-content">
-          <h3>Modo Foco (Pomodoro)</h3>
-          <p>Técnica comprovada de estudo com temporizador ajustável para maximizar sua concentração e produtividade.</p>
-          <span class="premium-badge">Grátis (Tempo pré-setado)</span>
+    <div class="container">
+        <div class="app-container">
+            <!-- Coluna 1: Timer e Tarefas -->
+            <div>
+                <!-- Timer Pomodoro -->
+                <div class="card">
+                    <h2 class="card-title">Temporizador Pomodoro</h2>
+                    <div class="timer-container">
+                        <div class="timer-modes">
+                            <button class="mode-btn active" data-mode="work">Trabalho</button>
+                            <button class="mode-btn" data-mode="break">Pausa Curta</button>
+                            <button class="mode-btn" data-mode="longBreak">Pausa Longa</button>
+                        </div>
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-controls">
+                            <button class="btn btn-primary" id="startBtn">Iniciar</button>
+                            <button class="btn btn-secondary" id="pauseBtn" disabled>Pausar</button>
+                            <button class="btn btn-danger" id="resetBtn">Resetar</button>
+                        </div>
+                        <div class="timer-settings">
+                            <div class="setting">
+                                <label for="workDuration">Trabalho (min)</label>
+                                <input type="number" id="workDuration" min="1" max="60" value="25">
+                            </div>
+                            <div class="setting">
+                                <label for="breakDuration">Pausa (min)</label>
+                                <input type="number" id="breakDuration" min="1" max="30" value="5">
+                            </div>
+                            <div class="setting">
+                                <label for="longBreakDuration">Pausa Longa (min)</label>
+                                <input type="number" id="longBreakDuration" min="1" max="60" value="15">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Tarefas -->
+                <div class="card">
+                    <h2 class="card-title">Tarefas de Estudo</h2>
+                    <ul class="task-list" id="taskList">
+                        <!-- Tarefas serão adicionadas dinamicamente -->
+                    </ul>
+                    <div class="add-task">
+                        <input type="text" id="newTaskInput" placeholder="Adicionar nova tarefa...">
+                        <button class="btn btn-primary" id="addTaskBtn">+</button>
+                    </div>
+                </div>
+
+                <!-- Anúncio (será mostrado entre sessões) -->
+                <div class="ad-container" id="adContainer">
+                    <h3>Anúncio</h3>
+                    <p>Upgrade para Premium para remover anúncios!</p>
+                    <button class="btn btn-warning" id="learnMoreBtn">Saiba Mais</button>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Estatísticas e Flashcards -->
+            <div>
+                <!-- Estatísticas -->
+                <div class="card">
+                    <h2 class="card-title">Estatísticas</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="sessionsCompleted">0</div>
+                            <div class="stat-label">Sessões Completas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalStudyTime">0h</div>
+                            <div class="stat-label">Tempo Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="tasksCompleted">0</div>
+                            <div class="stat-label">Tarefas Concluídas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="productivityScore">0%</div>
+                            <div class="stat-label">Produtividade</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seleção de Temas -->
+                <div class="card">
+                    <h2 class="card-title">Temas de Estudo</h2>
+                    <div class="theme-selector" id="themeSelector">
+                        <!-- Temas serão adicionados dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- Flashcards -->
+                <div class="card">
+                    <h2 class="card-title">Flashcards</h2>
+                    <div class="flashcard" id="flashcard">
+                        <div class="flashcard-front">
+                            <p>Clique para ver a resposta</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <p>Resposta do flashcard</p>
+                        </div>
+                    </div>
+                    <div class="flashcard-actions">
+                        <button class="btn btn-secondary" id="prevCardBtn" disabled>Anterior</button>
+                        <button class="btn btn-primary" id="nextCardBtn">Próximo</button>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="btn btn-success" id="createCardBtn">Criar Flashcard</button>
+                    </div>
+                </div>
+
+                <!-- Gerenciamento de Dados -->
+                <div class="card">
+                    <h2 class="card-title">Gerenciamento de Dados</h2>
+                    <p>Seus dados são salvos automaticamente em formato JSON</p>
+                    <div class="data-management">
+                        <button class="btn btn-info" id="exportDataBtn">Exportar JSON</button>
+                        <button class="btn btn-warning" id="importDataBtn">Importar JSON</button>
+                        <button class="btn btn-danger" id="clearDataBtn">Limpar Dados</button>
+                    </div>
+                    <div class="json-viewer" id="jsonViewer">
+                        {/* JSON será exibido aqui */}
+                    </div>
+                </div>
+            </div>
         </div>
-      </button>
 
-      <button class="feature-card btn-feature" onclick="window.location.href='postits.html'">
-        <div class="feature-icon">📝</div>
-        <div class="feature-content">
-          <h3>Post-its Digitais</h3>
-          <p>Crie notas rápidas diretamente na tela, arraste e organize como preferir para manter suas ideias à mão.</p>
-          <span class="premium-badge">Grátis</span>
+        <!-- Seção de Informações -->
+        <div class="info-section">
+            <h3>Como funciona o StudyFlow?</h3>
+            <p>O StudyFlow é um planner de estudos que utiliza a técnica Pomodoro para melhorar sua produtividade:</p>
+            <ul>
+                <li><strong>Temporizador Pomodoro</strong>: Estude por 25 minutos e faça pausas de 5 minutos. A cada 4 sessões, faça uma pausa longa de 15-30 minutos.</li>
+                <li><strong>Lista de Tarefas</strong>: Organize seus tópicos de estudo e marque como concluídos.</li>
+                <li><strong>Flashcards</strong>: Crie cartões de revisão para memorização.</li>
+                <li><strong>Estatísticas</strong>: Acompanhe seu progresso e produtividade.</li>
+                <li><strong>Temas</strong>: Organize seus estudos por matérias ou tópicos.</li>
+            </ul>
+            
+            <h3>Sistema de Salvamento em JSON</h3>
+            <p>Seus dados são salvos automaticamente em formato JSON sempre que você:</p>
+            <ul>
+                <li>Adiciona, conclui ou remove uma tarefa</li>
+                <li>Completa uma sessão Pomodoro</li>
+                <li>Cria ou navega entre flashcards</li>
+                <li>Altera configurações do timer</li>
+                <li>Ativa o modo premium</li>
+            </ul>
+            <p>O JSON é salvo no localStorage do navegador e pode ser exportado/importado a qualquer momento.</p>
         </div>
-      </button>
-
-      <button class="feature-card btn-feature" onclick="window.location.href='flashcards.html'">
-        <div class="feature-icon">📚</div>
-        <div class="feature-content">
-          <h3>Flashcards Inteligentes</h3>
-          <p>Crie cartões de estudo com perguntas e respostas para revisão eficaz de conteúdos importantes.</p>
-          <span class="premium-badge">Grátis (5 cartões)</span>
-        </div>
-      </button>
-
-      <button class="feature-card btn-feature" onclick="window.location.href='dicas.html'">
-        <div class="feature-icon">💡</div>
-        <div class="feature-content">
-          <h3>Dicas de Estudo</h3>
-          <p>Acesso a um banco de dicas e técnicas de estudo comprovadas por especialistas em aprendizagem.</p>
-          <span class="premium-badge">Premium</span>
-        </div>
-      </button>
-
-      <button class="feature-card btn-feature" onclick="window.location.href='relatorios.html'">
-        <div class="feature-icon">📊</div>
-        <div class="feature-content">
-          <h3>Relatórios de Progresso</h3>
-          <p>Visualize seu desempenho com gráficos e métricas detalhadas sobre seu tempo de estudo e produtividade.</p>
-          <span class="premium-badge">Premium</span>
-        </div>
-      </button>
-
     </div>
-  </div>
-</section>
 
-<section id="planos" style="background-color: var(--bg);">
-  <div class="container">
-    <h2 class="section-title">Escolha seu <span>Plano Premium</span></h2>
-    <div class="pricing-container">
-
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Mensal</h3>
-          <div class="pricing-price">R$9,90</div>
-          <p>Acesso completo por 30 dias</p>
+    <!-- Modal Premium -->
+    <div class="modal" id="premiumModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upgrade para Premium</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <p>Desbloqueie todos os recursos premium por apenas:</p>
+            <div class="premium-price">R$ 9,90/mês</div>
+            <ul class="premium-features">
+                <li>Todos os temas de estudo desbloqueados</li>
+                <li>Estatísticas avançadas</li>
+                <li>Flashcards ilimitados</li>
+                <li>Sem anúncios</li>
+                <li>Exportação de dados</li>
+            </ul>
+            <div class="ad-container" style="margin: 20px 0;">
+                <p>Área para inserção de chave premium</p>
+                <input type="text" id="premiumKeyInput" placeholder="Digite sua chave premium" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: var(--radius);">
+                <button class="btn btn-success" id="activatePremiumBtn" style="width: 100%;">Ativar Premium</button>
+            </div>
+            <button class="upgrade-btn" id="upgradeBtn">Fazer Upgrade Agora</button>
         </div>
-        <ul class="pricing-features">
-          <li>5 matérias ilimitadas</li>
-          <li>Flashcards</li>
-          <li>Relatórios</li>
-          <li>Dicas de Estudo</li>
-          <li>Acesso ao modo foco personalizável</li>
-        </ul>
-      </div>
-
-      <div class="pricing-card popular">
-        <div class="pricing-header">
-          <h3>Trimestral</h3>
-          <div class="pricing-price">R$24,90</div>
-          <p>Economize 16% - 3 meses</p>
-        </div>
-        <ul class="pricing-features">
-          <li>5 matérias ilimitadas</li>
-          <li>Flashcards</li>
-          <li>Relatórios</li>
-          <li>Dicas de Estudo</li>
-          <li>Acesso ao modo foco personalizável</li>
-          <li>Bônus: E-book exclusivo</li>
-        </ul>
-      </div>
-
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Anual</h3>
-          <div class="pricing-price">R$79,90</div>
-          <p>Economize 33% - 12 meses</p>
-        </div>
-        <ul class="pricing-features">
-          <li>5 matérias ilimitadas</li>
-          <li>Flashcards</li>
-          <li>Relatórios</li>
-          <li>Dicas de Estudo</li>
-          <li>Acesso ao modo foco personalizável</li>
-          <li>Bônus: E-book + Webinars</li>
-          <li>Suporte prioritário</li>
-        </ul>
-      </div>
-
     </div>
-  </div>
-</section>
 
-<section id="ativacao">
-  <div class="container activation-container">
-    <h2 class="section-title">Ative seu Plano Premium</h2>
-    <p>Insira sua chave de ativação para desbloquear todos os recursos Premium.</p>
-    <div class="activation-input">
-      <input type="text" id="activationKey" placeholder="Digite a chave aqui" aria-label="Chave de ativação" />
-      <button onclick="ativarPremium()" aria-label="Ativar plano">Ativar</button>
-    </div>
-    <div id="activationMessage" role="alert" aria-live="polite"></div>
-  </div>
-</section>
+    <!-- Input oculto para importação de arquivo -->
+    <input type="file" id="fileInput" accept=".json" style="display: none;">
 
-<section id="sobre">
-  <div class="container">
-    <h2 class="section-title">Sobre o MBS Estudo+</h2>
-    <p>O MBS Estudo+ foi criado para ajudar estudantes a conquistarem seus objetivos de forma organizada, eficiente e divertida. Desenvolvido com tecnologia moderna, nossa plataforma oferece ferramentas exclusivas para tornar seu aprendizado mais dinâmico e produtivo.</p>
-  </div>
-</section>
+    <script>
+        // Elementos do DOM
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const workDurationInput = document.getElementById('workDuration');
+        const breakDurationInput = document.getElementById('breakDuration');
+        const longBreakDurationInput = document.getElementById('longBreakDuration');
+        const taskList = document.getElementById('taskList');
+        const newTaskInput = document.getElementById('newTaskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const sessionsCompletedEl = document.getElementById('sessionsCompleted');
+        const totalStudyTimeEl = document.getElementById('totalStudyTime');
+        const tasksCompletedEl = document.getElementById('tasksCompleted');
+        const productivityScoreEl = document.getElementById('productivityScore');
+        const themeSelector = document.getElementById('themeSelector');
+        const flashcard = document.getElementById('flashcard');
+        const prevCardBtn = document.getElementById('prevCardBtn');
+        const nextCardBtn = document.getElementById('nextCardBtn');
+        const createCardBtn = document.getElementById('createCardBtn');
+        const premiumBadge = document.getElementById('premiumBadge');
+        const premiumModal = document.getElementById('premiumModal');
+        const closeModal = document.getElementById('closeModal');
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const adContainer = document.getElementById('adContainer');
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const premiumKeyInput = document.getElementById('premiumKeyInput');
+        const activatePremiumBtn = document.getElementById('activatePremiumBtn');
+        const upgradeBtn = document.getElementById('upgradeBtn');
+        const exportDataBtn = document.getElementById('exportDataBtn');
+        const importDataBtn = document.getElementById('importDataBtn');
+        const clearDataBtn = document.getElementById('clearDataBtn');
+        const jsonViewer = document.getElementById('jsonViewer');
+        const fileInput = document.getElementById('fileInput');
 
-<section id="contato">
-  <div class="container">
-    <h2 class="section-title">Fale Conosco</h2>
-    <p>Quer tirar dúvidas, sugerir melhorias ou dar feedback? Envie uma mensagem para nossa equipe:</p>
-    <form action="mailto:contato@mbsestudo.com.br" method="post" enctype="text/plain">
-      <label for="name">Nome:</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+        // Estado da aplicação
+        let state = {
+            timer: {
+                isRunning: false,
+                currentMode: 'work', // 'work', 'break', 'longBreak'
+                timeLeft: 25 * 60, // 25 minutos em segundos
+                workDuration: 25,
+                breakDuration: 5,
+                longBreakDuration: 15,
+                sessionsCompleted: 0,
+                totalStudyTime: 0,
+                sessionsBeforeLongBreak: 0,
+                lastUpdated: new Date().toISOString()
+            },
+            tasks: [],
+            currentTheme: 'geral',
+            themes: [
+                { id: 'geral', name: 'Geral', locked: false },
+                { id: 'matematica', name: 'Matemática', locked: false },
+                { id: 'portugues', name: 'Português', locked: true },
+                { id: 'historia', name: 'História', locked: true },
+                { id: 'ciencias', name: 'Ciências', locked: true },
+                { id: 'ingles', name: 'Inglês', locked: true }
+            ],
+            flashcards: [
+                { id: 1, front: 'O que é a técnica Pomodoro?', back: 'É um método de gerenciamento de tempo que usa temporizador para dividir o trabalho em intervalos.' },
+                { id: 2, front: 'Qual a duração padrão de um Pomodoro?', back: '25 minutos de trabalho seguidos de 5 minutos de pausa.' }
+            ],
+            currentFlashcardIndex: 0,
+            isPremium: false,
+            appVersion: '1.0.0',
+            lastSave: new Date().toISOString()
+        };
 
-      <label for="email">E-mail:</label><br />
-      <input type="email" id="email" name="email" required /><br /><br />
+        // Inicialização
+        function init() {
+            loadState();
+            renderTasks();
+            renderThemes();
+            renderFlashcard();
+            updateStats();
+            setupEventListeners();
+            updateTimerDisplay();
+            updateModeButtons();
+            updateJSONViewer();
+        }
 
-      <label for="message">Mensagem:</label><br />
-      <textarea id="message" name="message" rows="5" required></textarea><br /><br />
+        // Carregar estado do localStorage
+        function loadState() {
+            const savedState = localStorage.getItem('studyFlowJSON');
+            if (savedState) {
+                try {
+                    const parsedState = JSON.parse(savedState);
+                    
+                    // Preservar dados importantes se a versão for diferente
+                    if (parsedState.appVersion !== state.appVersion) {
+                        console.log('Versão diferente detectada, mesclando dados...');
+                        // Mesclar dados importantes
+                        if (parsedState.timer) state.timer = {...state.timer, ...parsedState.timer};
+                        if (parsedState.tasks) state.tasks = parsedState.tasks;
+                        if (parsedState.flashcards) state.flashcards = parsedState.flashcards;
+                        if (parsedState.isPremium !== undefined) state.isPremium = parsedState.isPremium;
+                    } else {
+                        state = {...state, ...parsedState};
+                    }
+                    
+                    // Atualizar inputs com valores salvos
+                    workDurationInput.value = state.timer.workDuration;
+                    breakDurationInput.value = state.timer.breakDuration;
+                    longBreakDurationInput.value = state.timer.longBreakDuration;
+                    
+                    // Configurar timer com valores salvos
+                    updateTimerForCurrentMode();
+                    updateTimerDisplay();
+                    
+                    // Atualizar badge premium
+                    updatePremiumBadge();
+                    
+                    console.log('Dados carregados do JSON:', state);
+                } catch (error) {
+                    console.error('Erro ao carregar dados do JSON:', error);
+                }
+            }
+        }
 
-      <button type="submit" class="btn">Enviar</button>
-    </form>
-  </div>
-</section>
+        // Salvar estado no localStorage em formato JSON
+        function saveState() {
+            try {
+                // Atualizar timestamp
+                state.lastSave = new Date().toISOString();
+                
+                // Converter para JSON
+                const jsonData = JSON.stringify(state, null, 2);
+                
+                // Salvar no localStorage
+                localStorage.setItem('studyFlowJSON', jsonData);
+                
+                // Atualizar visualizador JSON
+                updateJSONViewer();
+                
+                console.log('Dados salvos em JSON:', state);
+            } catch (error) {
+                console.error('Erro ao salvar dados em JSON:', error);
+            }
+        }
 
-<footer>
-  &copy; 2025 MBS Estudo+. Todos os direitos reservados.
-</footer>
+        // Atualizar visualizador JSON
+        function updateJSONViewer() {
+            jsonViewer.textContent = JSON.stringify(state, null, 2);
+        }
 
-<!-- Botão para alternar tema -->
-<div class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro">🌓</div>
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Timer
+            startBtn.addEventListener('click', startTimer);
+            pauseBtn.addEventListener('click', pauseTimer);
+            resetBtn.addEventListener('click', resetTimer);
+            workDurationInput.addEventListener('change', updateTimerSettings);
+            breakDurationInput.addEventListener('change', updateTimerSettings);
+            longBreakDurationInput.addEventListener('change', updateTimerSettings);
+            
+            // Modos do timer
+            modeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mode = this.dataset.mode;
+                    switchMode(mode);
+                });
+            });
+            
+            // Tarefas
+            addTaskBtn.addEventListener('click', addTask);
+            newTaskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addTask();
+            });
+            
+            // Flashcards
+            flashcard.addEventListener('click', flipFlashcard);
+            prevCardBtn.addEventListener('click', showPrevFlashcard);
+            nextCardBtn.addEventListener('click', showNextFlashcard);
+            createCardBtn.addEventListener('click', createFlashcard);
+            
+            // Premium
+            premiumBadge.addEventListener('click', showPremiumModal);
+            closeModal.addEventListener('click', hidePremiumModal);
+            learnMoreBtn.addEventListener('click', showPremiumModal);
+            activatePremiumBtn.addEventListener('click', activatePremium);
+            upgradeBtn.addEventListener('click', showPremiumModal);
+            
+            // Gerenciamento de dados
+            exportDataBtn.addEventListener('click', exportData);
+            importDataBtn.addEventListener('click', importData);
+            clearDataBtn.addEventListener('click', clearData);
+            fileInput.addEventListener('change', handleFileUpload);
+            
+            // Fechar modal ao clicar fora
+            window.addEventListener('click', (e) => {
+                if (e.target === premiumModal) {
+                    hidePremiumModal();
+                }
+            });
 
-<script>
-  // Alternar menu mobile
-  document.querySelector('.mobile-toggle').addEventListener('click', function () {
-    document.querySelector('.nav-links').classList.toggle('active');
-  });
+            // Salvar automaticamente quando a página for fechada
+            window.addEventListener('beforeunload', saveState);
+        }
 
-  // Alternar tema claro/escuro
-  function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-  }
+        // Funções do Timer
+        function startTimer() {
+            if (!state.timer.isRunning) {
+                state.timer.isRunning = true;
+                startBtn.disabled = true;
+                pauseBtn.disabled = false;
+                
+                state.timer.intervalId = setInterval(() => {
+                    state.timer.timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (state.timer.timeLeft <= 0) {
+                        clearInterval(state.timer.intervalId);
+                        timerComplete();
+                    }
+                    
+                    // Salvar a cada 10 segundos enquanto o timer está rodando
+                    if (state.timer.timeLeft % 10 === 0) {
+                        saveState();
+                    }
+                }, 1000);
+            }
+        }
 
-  // Carregar tema salvo
-  window.addEventListener('load', () => {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
-  });
+        function pauseTimer() {
+            if (state.timer.isRunning) {
+                state.timer.isRunning = false;
+                clearInterval(state.timer.intervalId);
+                startBtn.disabled = false;
+                pauseBtn.disabled = true;
+                saveState(); // Salvar ao pausar
+            }
+        }
 
-  // Simulação de ativação Premium
-  function ativarPremium() {
-    const chave = document.getElementById('activationKey').value.trim();
-    const msg = document.getElementById('activationMessage');
-    if (chave === 'PREMIUM2025') {
-      msg.textContent = '🎉 Ativação bem-sucedida! Aproveite seu plano Premium.';
-      msg.style.color = 'green';
-    } else {
-      msg.textContent = '❌ Chave inválida. Tente novamente.';
-      msg.style.color = 'red';
-    }
-  }
-</script>
+        function resetTimer() {
+            pauseTimer();
+            updateTimerForCurrentMode();
+            updateTimerDisplay();
+            saveState(); // Salvar ao resetar
+        }
 
-<!-- Link para o seu ativo.js -->
-<script src="ativo.js"></script>
+        function switchMode(mode) {
+            // Não permitir trocar de modo com timer rodando
+            if (state.timer.isRunning) {
+                alert('Pare o timer antes de trocar de modo');
+                return;
+            }
+            
+            state.timer.currentMode = mode;
+            updateTimerForCurrentMode();
+            updateTimerDisplay();
+            updateModeButtons();
+            saveState(); // Salvar ao trocar de modo
+        }
 
+        function updateModeButtons() {
+            modeButtons.forEach(btn => {
+                if (btn.dataset.mode === state.timer.currentMode) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function updateTimerForCurrentMode() {
+            switch(state.timer.currentMode) {
+                case 'work':
+                    state.timer.timeLeft = state.timer.workDuration * 60;
+                    break;
+                case 'break':
+                    state.timer.timeLeft = state.timer.breakDuration * 60;
+                    break;
+                case 'longBreak':
+                    state.timer.timeLeft = state.timer.longBreakDuration * 60;
+                    break;
+            }
+        }
+
+        function updateTimerSettings() {
+            state.timer.workDuration = parseInt(workDurationInput.value) || 25;
+            state.timer.breakDuration = parseInt(breakDurationInput.value) || 5;
+            state.timer.longBreakDuration = parseInt(longBreakDurationInput.value) || 15;
+            
+            if (!state.timer.isRunning) {
+                updateTimerForCurrentMode();
+                updateTimerDisplay();
+            }
+            
+            saveState(); // Salvar ao alterar configurações
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(state.timer.timeLeft / 60);
+            const seconds = state.timer.timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Mudar cor do timer baseado no modo
+            if (state.timer.currentMode === 'work') {
+                timerDisplay.style.color = 'var(--primary)';
+            } else {
+                timerDisplay.style.color = 'var(--success)';
+            }
+        }
+
+        function timerComplete() {
+            state.timer.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            
+            // Tocar som de notificação
+            playNotificationSound();
+            
+            if (state.timer.currentMode === 'work') {
+                // Sessão de trabalho concluída
+                state.timer.sessionsCompleted++;
+                state.timer.totalStudyTime += state.timer.workDuration;
+                state.timer.sessionsBeforeLongBreak++;
+                
+                // Mostrar anúncio se não for premium
+                if (!state.isPremium) {
+                    adContainer.style.display = 'block';
+                }
+                
+                // Verificar se é hora de uma pausa longa
+                if (state.timer.sessionsBeforeLongBreak >= 4) {
+                    state.timer.currentMode = 'longBreak';
+                    state.timer.sessionsBeforeLongBreak = 0;
+                    alert('Sessão de trabalho concluída! Hora de uma pausa longa.');
+                } else {
+                    state.timer.currentMode = 'break';
+                    alert('Sessão de trabalho concluída! Hora de uma pausa curta.');
+                }
+            } else {
+                // Pausa concluída, voltar ao trabalho
+                state.timer.currentMode = 'work';
+                alert('Pausa concluída! Volte ao trabalho.');
+                
+                // Esconder anúncio
+                adContainer.style.display = 'none';
+            }
+            
+            updateTimerForCurrentMode();
+            updateTimerDisplay();
+            updateModeButtons();
+            updateStats();
+            saveState(); // Salvar ao completar sessão
+        }
+
+        function playNotificationSound() {
+            // Criar um som de notificação simples
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 0.1);
+            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        // Tarefas
+        function addTask() {
+            const taskText = newTaskInput.value.trim();
+            if (taskText) {
+                const newTask = {
+                    id: Date.now(),
+                    text: taskText,
+                    completed: false,
+                    theme: state.currentTheme,
+                    createdAt: new Date().toISOString(),
+                    completedAt: null
+                };
+                
+                state.tasks.push(newTask);
+                newTaskInput.value = '';
+                renderTasks();
+                updateStats();
+                saveState(); // Salvar ao adicionar tarefa
+            }
+        }
+
+        function toggleTask(id) {
+            const task = state.tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                task.completedAt = task.completed ? new Date().toISOString() : null;
+                renderTasks();
+                updateStats();
+                saveState(); // Salvar ao alternar tarefa
+            }
+        }
+
+        function deleteTask(id) {
+            state.tasks = state.tasks.filter(t => t.id !== id);
+            renderTasks();
+            updateStats();
+            saveState(); // Salvar ao deletar tarefa
+        }
+
+        function renderTasks() {
+            taskList.innerHTML = '';
+            
+            const filteredTasks = state.tasks.filter(task => 
+                state.currentTheme === 'geral' || task.theme === state.currentTheme
+            );
+            
+            if (filteredTasks.length === 0) {
+                taskList.innerHTML = '<li style="text-align: center; padding: 20px; color: #666;">Nenhuma tarefa adicionada</li>';
+                return;
+            }
+            
+            filteredTasks.forEach(task => {
+                const taskItem = document.createElement('li');
+                taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+                
+                taskItem.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+                    <span class="task-name">${task.text}</span>
+                    <div class="task-actions">
+                        <button class="icon-btn delete-task">🗑️</button>
+                    </div>
+                `;
+                
+                const checkbox = taskItem.querySelector('.task-checkbox');
+                const deleteBtn = taskItem.querySelector('.delete-task');
+                
+                checkbox.addEventListener('change', () => toggleTask(task.id));
+                deleteBtn.addEventListener('click', () => deleteTask(task.id));
+                
+                taskList.appendChild(taskItem);
+            });
+        }
+
+        // Temas
+        function renderThemes() {
+            themeSelector.innerHTML = '';
+            
+            state.themes.forEach(theme => {
+                const themeEl = document.createElement('div');
+                themeEl.className = `theme ${theme.locked ? 'locked' : ''} ${state.currentTheme === theme.id ? 'active' : ''}`;
+                themeEl.textContent = theme.name;
+                
+                if (!theme.locked || state.isPremium) {
+                    themeEl.addEventListener('click', () => {
+                        state.currentTheme = theme.id;
+                        renderThemes();
+                        renderTasks();
+                        saveState(); // Salvar ao trocar tema
+                    });
+                } else {
+                    themeEl.addEventListener('click', () => {
+                        if (!state.isPremium) {
+                            showPremiumModal();
+                        }
+                    });
+                }
+                
+                themeSelector.appendChild(themeEl);
+            });
+        }
+
+        // Flashcards
+        function renderFlashcard() {
+            if (state.flashcards.length === 0) {
+                flashcard.innerHTML = '<p>Nenhum flashcard disponível. Crie o primeiro!</p>';
+                prevCardBtn.disabled = true;
+                nextCardBtn.disabled = true;
+                return;
+            }
+            
+            const currentCard = state.flashcards[state.currentFlashcardIndex];
+            flashcard.querySelector('.flashcard-front p').textContent = currentCard.front;
+            flashcard.querySelector('.flashcard-back p').textContent = currentCard.back;
+            flashcard.classList.remove('flipped');
+            
+            prevCardBtn.disabled = state.currentFlashcardIndex === 0;
+            nextCardBtn.disabled = state.currentFlashcardIndex === state.flashcards.length - 1;
+        }
+
+        function flipFlashcard() {
+            flashcard.classList.toggle('flipped');
+        }
+
+        function showPrevFlashcard() {
+            if (state.currentFlashcardIndex > 0) {
+                state.currentFlashcardIndex--;
+                renderFlashcard();
+                saveState(); // Salvar ao navegar entre flashcards
+            }
+        }
+
+        function showNextFlashcard() {
+            if (state.currentFlashcardIndex < state.flashcards.length - 1) {
+                state.currentFlashcardIndex++;
+                renderFlashcard();
+                saveState(); // Salvar ao navegar entre flashcards
+            }
+        }
+
+        function createFlashcard() {
+            if (!state.isPremium && state.flashcards.length >= 2) {
+                showPremiumModal();
+                return;
+            }
+            
+            const front = prompt('Digite a pergunta do flashcard:');
+            if (front) {
+                const back = prompt('Digite a resposta do flashcard:');
+                if (back) {
+                    const newCard = {
+                        id: Date.now(),
+                        front: front,
+                        back: back,
+                        theme: state.currentTheme,
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    state.flashcards.push(newCard);
+                    state.currentFlashcardIndex = state.flashcards.length - 1;
+                    renderFlashcard();
+                    saveState(); // Salvar ao criar flashcard
+                }
+            }
+        }
+
+        // Estatísticas
+        function updateStats() {
+            sessionsCompletedEl.textContent = state.timer.sessionsCompleted;
+            
+            const totalHours = Math.floor(state.timer.totalStudyTime / 60);
+            const totalMinutes = state.timer.totalStudyTime % 60;
+            totalStudyTimeEl.textContent = `${totalHours}h ${totalMinutes}m`;
+            
+            const completedTasks = state.tasks.filter(t => t.completed).length;
+            tasksCompletedEl.textContent = completedTasks;
+            
+            const totalTasks = state.tasks.length;
+            const productivity = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            productivityScoreEl.textContent = `${productivity}%`;
+        }
+
+        // Premium
+        function showPremiumModal() {
+            premiumModal.style.display = 'flex';
+        }
+
+        function hidePremiumModal() {
+            premiumModal.style.display = 'none';
+        }
+
+        function activatePremium() {
+            const key = premiumKeyInput.value.trim();
+            // Simulação de validação de chave
+            if (key === 'PREMIUM2024' || key === 'TESTE123') {
+                state.isPremium = true;
+                updatePremiumBadge();
+                hidePremiumModal();
+                renderThemes();
+                alert('Premium ativado com sucesso!');
+                saveState(); // Salvar ao ativar premium
+            } else {
+                alert('Chave premium inválida. Use PREMIUM2024 ou TESTE123 para teste.');
+            }
+        }
+
+        function updatePremiumBadge() {
+            if (state.isPremium) {
+                premiumBadge.textContent = 'Premium';
+                premiumBadge.style.backgroundColor = 'var(--success)';
+                premiumBadge.style.color = 'white';
+            } else {
+                premiumBadge.textContent = 'Free';
+                premiumBadge.style.backgroundColor = 'var(--warning)';
+                premiumBadge.style.color = 'var(--dark)';
+            }
+        }
+
+        // Gerenciamento de dados
+        function exportData() {
+            const dataStr = JSON.stringify(state, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `studyflow-data-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function importData() {
+            fileInput.click();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+                    
+                    if (confirm('Isso substituirá todos os seus dados atuais. Continuar?')) {
+                        state = {...state, ...importedState};
+                        
+                        // Atualizar a interface
+                        loadState();
+                        renderTasks();
+                        renderThemes();
+                        renderFlashcard();
+                        updateStats();
+                        updateTimerDisplay();
+                        updateModeButtons();
+                        updatePremiumBadge();
+                        
+                        alert('Dados importados com sucesso!');
+                        saveState(); // Salvar após importação
+                    }
+                } catch (error) {
+                    alert('Erro ao importar arquivo. Verifique se é um JSON válido.');
+                    console.error('Erro na importação:', error);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Limpar o input para permitir importar o mesmo arquivo novamente
+            event.target.value = '';
+        }
+
+        function clearData() {
+            if (confirm('Isso apagará TODOS os seus dados permanentemente. Continuar?')) {
+                localStorage.removeItem('studyFlowJSON');
+                state = {
+                    timer: {
+                        isRunning: false,
+                        currentMode: 'work',
+                        timeLeft: 25 * 60,
+                        workDuration: 25,
+                        breakDuration: 5,
+                        longBreakDuration: 15,
+                        sessionsCompleted: 0,
+                        totalStudyTime: 0,
+                        sessionsBeforeLongBreak: 0,
+                        lastUpdated: new Date().toISOString()
+                    },
+                    tasks: [],
+                    currentTheme: 'geral',
+                    themes: [
+                        { id: 'geral', name: 'Geral', locked: false },
+                        { id: 'matematica', name: 'Matemática', locked: false },
+                        { id: 'portugues', name: 'Português', locked: true },
+                        { id: 'historia', name: 'História', locked: true },
+                        { id: 'ciencias', name: 'Ciências', locked: true },
+                        { id: 'ingles', name: 'Inglês', locked: true }
+                    ],
+                    flashcards: [
+                        { id: 1, front: 'O que é a técnica Pomodoro?', back: 'É um método de gerenciamento de tempo que usa temporizador para dividir o trabalho em intervalos.' },
+                        { id: 2, front: 'Qual a duração padrão de um Pomodoro?', back: '25 minutos de trabalho seguidos de 5 minutos de pausa.' }
+                    ],
+                    currentFlashcardIndex: 0,
+                    isPremium: false,
+                    appVersion: '1.0.0',
+                    lastSave: new Date().toISOString()
+                };
+                
+                // Atualizar a interface
+                renderTasks();
+                renderThemes();
+                renderFlashcard();
+                updateStats();
+                updateTimerDisplay();
+                updateModeButtons();
+                updatePremiumBadge();
+                updateJSONViewer();
+                
+                alert('Todos os dados foram apagados.');
+            }
+        }
+
+        // Inicializar a aplicação
+        init();
+    </script>
 </body>
 </html>
